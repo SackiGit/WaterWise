@@ -24,9 +24,118 @@
                     </div>
                 </header>
 
-                <h1>Waterwise</h1>
+                <h1>Water Usage Calculator</h1>
+                <p>Select your daily household habits below to estimate your water <br> consumption and discover tailored ways to reduce waste.</p>
             </div>
             
+            <main>
+                <div class="calculator-grid">
+                    <div class="calculator-input">
+                            <form id="calculator-form">
+                        <h2>Water Usage Questions</h2>
+                        <!-- Question 1: Shower Duration -->
+                        <div class="question-group">
+                            <label for="shower">Shower Duration & Frequency</label>
+                            <select id="shower">
+                                <option value="10">Short shower (~5 mins)</option>
+                                <option value="20" selected>Average shower (~10 mins)</option>
+                                <option value="35">Long shower (~15+ mins)</option>
+                                <option value="50">Multiple / Extra long showers</option>
+                            </select>
+                            <div class="field-hint">Based on standard ~8 Lpm showerhead output</div>
+                        </div>
+
+                        <!-- Question 2: Toilet Flushes -->
+                        <div class="question-group">
+                            <label for="toilet">Daily Toilet Flushes (Per Person)</label>
+                            <select id="toilet">
+                                <option value="6">Low flush (3-4 flushes)</option>
+                                <option value="12" selected>Standard (5-6 flushes)</option>
+                                <option value="20">Frequent (7+ flushes or older toilet)</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 3: Running Tap / Sink Habits -->
+                        <div class="question-group">
+                            <label for="faucet">Tap / Faucet Running Habits (Teeth, Washing)</label>
+                            <select id="faucet">
+                                <option value="2">Turn tap off while brushing/washing</option>
+                                <option value="8" selected>Leave tap running occasionally</option>
+                                <option value="15">Leave tap running constantly</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 4: Dishwashing -->
+                        <div class="question-group">
+                            <label for="dishes">Dishwashing Method & Frequency</label>
+                            <select id="dishes">
+                                <option value="4">EnergyStar Dishwasher (Full load)</option>
+                                <option value="10" selected>Standard Dishwasher / Quick handwash</option>
+                                <option value="24">Handwashing with tap running</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 5: Laundry -->
+                        <div class="question-group">
+                            <label for="laundry">Laundry Loads (Per Week)</label>
+                            <select id="laundry">
+                                <option value="3">1-2 loads per week</option>
+                                <option value="7" selected>3-4 loads per week</option>
+                                <option value="14">5-7 loads per week</option>
+                                <option value="22">8+ loads per week</option>
+                            </select>
+                        </div>
+
+                        <!-- Question 6: Lawn / Garden Watering -->
+                        <div class="question-group">
+                            <label for="lawn">Lawn & Outdoor Garden Watering</label>
+                            <select id="lawn">
+                                <option value="0" selected>No lawn watering / Drought resilient</option>
+                                <option value="15">Light garden hand-watering</option>
+                                <option value="40">Sprinkler (2-3 times per week)</option>
+                                <option value="90">Large lawn automated irrigation</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+               <div class="caluclator-result">
+                            <h2>Estimated Water Footprint</h2>
+
+                            <div class="result-total">
+                                <span class="total-number">62</span>
+                                <span class="total-unit">Liters / Day</span>
+                            </div>
+
+                            <div class="result-breakdown">
+                                <div class="breakdown-item">
+                                    <span>Shower</span>
+                                    <span class="breakdown-value">75 L</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Toilet</span>
+                                    <span class="breakdown-value">45 L</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Faucet</span>
+                                    <span class="breakdown-value">30 L</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Dishwashing</span>
+                                    <span class="breakdown-value">25 L</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Laundry</span>
+                                    <span class="breakdown-value">60 L</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span>Lawn & Garden</span>
+                                    <span class="breakdown-value">0 L</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+
 
 
         <footer>

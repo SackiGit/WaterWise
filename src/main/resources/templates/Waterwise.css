@@ -8,6 +8,9 @@ body{
     min-height: 100vh;
 }
 
+main{
+    flex: 1;
+}
 
 
 
@@ -98,7 +101,7 @@ header{
   background-repeat: no-repeat;
   min-height: 100vh;
 
-  /* Flexbox setup directly on the container */
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,7 +128,6 @@ header{
   margin: 0;
   color: #333333;
   font-size: 16px;
-  line-height: 1.6;
 }
 
 
@@ -160,4 +162,129 @@ footer {
     justify-content: center;
     align-items: center;
 
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+.watercalculator-mainscreen{
+    position: relative;
+    background-image: linear-gradient(rgba(11, 60, 93, 0.75), rgba(11, 60, 93, 0.85)), url('Watercalculator-main.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.watercalculator-mainscreen h1{
+    color: #69b8f8;
+    font-size: 40px;
+    margin: 0;
+    margin-top: 60px;
+}
+
+.watercalculator-mainscreen p{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+
+.calculator-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 40px 20px;
+}
+
+.calculator-input,
+.caluclator-result {
+    width: 60vh;
+}
+
+
+
+
+
+
+.question-group {
+    margin-bottom: 20px;
+}
+
+.question-group label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 15px;
+    }
+
+.question-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #cce3f6;
+    background-color: #f8fafc;
+    font-size: 15px;
+    color: #333333;
+    outline: none;
+    cursor: pointer;
+    }
+
+
+#calculator-form {
+    background: #e0e0e0;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+
+
+
+.caluclator-result {
+    background-color: #0b3c5d;
+    color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.caluclator-result h2 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    color: #69b8f8;
+    text-align: center;
+}
+
+.result-total {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.total-number {
+    display: block;
+    font-size: 44px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    margin-top: 30px;
 }
