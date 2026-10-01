@@ -1,32 +1,92 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Waterwise</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="Waterwise.css">
-    </head>
-    <body>
-  <header>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Waterwise - Logs</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/Waterwise.css">
+</head>
+
+<body>
+
+<header>
     <div class="nav-container">
-            <a href="index.html">
-                <img src="Waterwise-logo.jpg" alt="Waterwise logo" class="logoimage">
-            </a>
-      <nav>
+        <a href="/">
+            <img src="/Waterwise-logo.jpg" alt="Waterwise logo" class="logoimage">
+        </a>
 
-            <a href="watercalculator.html" class="navitem">Water calculator</a>
-            <a href="logs.html" class="navitem">Logs</a>
-            <a href="AboutUs.html" class="navitem">About us</a>
-      </nav>
+        <nav>
+            <a href="/watercalculator" class="navitem">Water calculator</a>
+            <a href="/logs" class="navitem">Logs</a>
+            <a href="/AboutUs" class="navitem">About us</a>
+        </nav>
     </div>
-  </header>
+</header>
 
 
+<main>
 
-        <footer>
-            <p>© 2026 WaterWise Water Usage Tracker</p>
-        </footer>
-    </body>
+    <h1>Water consumption logs</h1>
+    <h2>
+        Total consumption:
+        <span th:text="${total['totallitres']}"></span> L
+    </h2>
+    <h2>Add water usage</h2>
+
+    <form action="/logs/add" method="post">
+
+        <label for="activity">Activity:</label>
+
+        <select name="activity" id="activity">
+            <option value="Shower">Shower</option>
+            <option value="Faucet">Faucet</option>
+            <option value="Washing machine">Washing machine</option>
+            <option value="Washing machine eco program">Washing machine eco program</option>
+            <option value="Toilet regular flush">Toilet regular flush</option>
+            <option value="Toilet small flush">Toilet small flush</option>
+            <option value="Dishwasher">Dishwasher</option>
+            <option value="Dishwasher eco program">Dishwasher eco program</option>
+        </select>
+
+        <br><br>
+
+        <label for="duration">Duration / amount:</label>
+        <input type="number" name="duration" id="duration" min="1" required>
+
+        <br><br>
+
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" required>
+
+        <br><br>
+
+        <button type="submit">Add log</button>
+
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Water consumption</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="row : ${consumption}">
+            <td th:text="${row['datum']}"></td>
+            <td th:text="${row['totallitres']} + ' L'"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+
+<footer>
+    <p>© 2026 WaterWise Water Usage Tracker</p>
+</footer>
+
+</body>
 </html>
