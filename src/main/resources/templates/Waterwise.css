@@ -34,7 +34,7 @@ main{
     border-radius: 50px;
 }
 
-.navitem {
+.navitem, .login-button{
     display: inline-block;
     padding: 8px 16px;
     color: #ffffff;
@@ -44,11 +44,20 @@ main{
     font-weight: 600;
     border-radius: 6px;
     transition: all 0.2s ease;
+    border: none;
 }
 
-.navitem:hover {
+.login-button{
+    margin-left: auto;
+}
+
+.navitem:hover, .login-button:hover {
     background-color: rgba(209, 209, 209, 0.5);
     color: #ffffff;
+}
+
+.navitem:active, .login-btn:active{
+    background-color: rgba(139, 139, 139, 0.644);
 }
 
 
@@ -164,6 +173,39 @@ footer {
 
 }
 
+.popup-container{
+    background-color: rgba(148, 148, 148, 0.411);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: opacity 0.3s ease;
+}
+
+.popup-container.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.login-box{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    max-width: 100%;
+    padding: 30px 50px;
+    border-radius: 10px;
+}
+
+
+
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
 
 .watercalculator-mainscreen{
@@ -235,7 +277,7 @@ footer {
     color: #333333;
     outline: none;
     cursor: pointer;
-    }
+}
 
 
 #calculator-form {
@@ -288,3 +330,19 @@ footer {
     font-size: 14px;
     margin-top: 30px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
