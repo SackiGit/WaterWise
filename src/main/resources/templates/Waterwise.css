@@ -349,3 +349,19 @@ footer {
 
 
 
+.logs-main{
+    position: relative;
+    background-image: linear-gradient(rgba(11, 60, 93, 0.75), rgba(11, 60, 93, 0.85)), url('logs-main.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logs-main h1{
+    color: white;
+}
