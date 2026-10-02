@@ -10,8 +10,13 @@ public class HomeController {
     public String showHomePage() {
         return "index";
     }
-    @GetMapping("/dashboard")
-    public String showDashboard() {
-        return "dashboard";
+    @GetMapping("/watercalculator")
+    public String showWaterCalculator() {
+        return "watercalculator";
+    }
+
+    @GetMapping("/about-us")
+    public String showAboutUs() {
+        return "AboutUs";
     }
 }
