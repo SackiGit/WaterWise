@@ -1,4 +1,4 @@
-package se.waterwise.APIs;
+package se.waterwise.APIs.sgu;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@ public class SguApi {
         client = HttpClient.newHttpClient();
     }
 
-    public int getAreaId(double latitude, double longitude)
+    private int getAreaId(double latitude, double longitude)
             throws IOException, InterruptedException {
 
         String url =
@@ -103,7 +103,7 @@ public class SguApi {
 
 
 
-    public GroundWaterData getLatestGroundwaterData(double latitude,double longitude)
+    public GroundWaterData getLatestGroundwaterData(double latitude, double longitude)
             throws IOException, InterruptedException {
         int areaId = getAreaId(latitude,longitude);
 

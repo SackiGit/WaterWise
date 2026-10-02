@@ -1,8 +1,10 @@
-package se.waterwise.APIs;
+package se.waterwise.APIs.sgu;
 
 public class GroundWaterData {
 
+    // Unique code for 4*4 km area
     private int areaId;
+    // Date of last estimated ground water level
     private String date;
     private int level;
 
