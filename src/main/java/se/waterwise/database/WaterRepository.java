@@ -41,4 +41,56 @@ public class WaterRepository {
                 """;
         jdbcTemplate.update(sql,userId,activity,duration,date);
     }
+
+    public List<Map<String, Object>> getConsumptionByActivityByDate(int userId, LocalDate startDate, LocalDate endDate) {
+        String sql = """
+                SELECT Activity,
+                SUM (TotalLitres) AS TotalLitres
+                FROM DailyConsumptionByActivity
+                WHERE Userid = ?
+                AND
+                Datum >= ?
+                AND
+                Datum <= ?
+                GROUP BY Activity
+                """;
+        return jdbcTemplate.queryForList(sql, userId, startDate, endDate);
+    }
+    public Map<String, Object> getTotalConsumptionByDate(int userId, LocalDate startDate, LocalDate endDate) {
+        String sql = """
+                SELECT SUM (TotalLitres) AS TotalLitres
+                FROM DailyConsumptionByActivity
+                WHERE Userid = ?
+                AND
+                Datum >= ?
+                AND
+                Datum <= ?
+                """;
+        return jdbcTemplate.queryForMap(sql, userId, startDate, endDate);
+    }
+
+    public Map<String, Object> findUser(String username) {
+        String sql = """
+            SELECT Userid, UserName, UserPassword
+            FROM Users
+            WHERE UserName = ?
+            """;
+
+        List<Map<String, Object>> users =
+                jdbcTemplate.queryForList(sql, username);
+
+        if (users.isEmpty()) {
+            return null;
+        }
+
+        return users.get(0);
+    }
+
+    public void createUser(String username, String password){
+        String sql = """
+                INSERT INTO Users (UserName, UserPassword)
+                VALUES (?,?)
+                """;
+        jdbcTemplate.update(sql,username,password);
+    }
 }

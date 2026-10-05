@@ -31,9 +31,12 @@ CREATE VIEW DailyConsumption AS
 CREATE VIEW TotalConsumption AS 
   SELECT 
   c.Userid,
-  SUM(c.Duration * w.Consumption) AS TotalLitres
-    FROM ConsMinutes c JOIN WaterData w
-    ON c.Activity = w.Activity
+  COALESCE(SUM(c.Duration * w.Consumption),0) AS TotalLitres
+    FROM Users u
+    Left JOIN ConsMinutes c
+        ON u.Userid = c.Userid
+    LEFT JOIN WaterData w
+        ON c.Activity = w.Activity
     GROUP BY c.Userid;
 
 --Gör en view för total konsumption över alla användare per kommun/totalt

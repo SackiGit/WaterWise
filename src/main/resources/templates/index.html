@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +26,18 @@
                             <a href="/logs" class="navitem">Logs</a>
                             <a href="/about-us" class="navitem">About us</a>
                         </nav>
-                      <button class="login-button" id="open_login">Login</button>
+                            <button class="login-button"
+                              id="open_login"
+                              th:if="${username == null}">
+                          Login
+                      </button>
+                        <span class="username"
+                            th:if="${username != null}"
+                            th:text="${username}">
+                        </span>
+                        <form action="/logout" method="post" th:if="${username !=null}">
+                            <button type="submit" class="logout-button">Logout</button>
+                        </form>
                     </div>
                 </header>
 
@@ -55,15 +66,37 @@
     
         <div class="popup-container" id="popup_container">
             <div class="login-box">
-                <form action="" class="login-form">
-                    <label for="fname">E-mail:</label><br>
-                    <input type="text" id="fname" name="fname"><br>
-                    <label for="lname">Password:</label><br>
-                    <input type="text" id="lname" name="lname"><br><br>
+                <form action="/login" method="post" class="login-form" id="login_form">
+                    <h2>Login</h2>
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" required><br>
+
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" required><br><br>
 
                     <div class="btn-holder">
-                        <button type="login" id="close_login">Login</button>
-                        <button type="Create account" id="close_login">Create Account</button>
+                        <button type="submit">Login</button>
+                        <button type="button" id="create_account">Create Account</button>
+                        <button type="button" id="close_login">Close</button>
+                    </div>
+
+                </form>
+                <form action="/register" method="post" class="login-form" id="register_form" style="display: none;">
+                    <h2>Create Account</h2>
+
+                    <label for="register_username">Username: </label><br>
+                    <input type="text" id="register_username" name="username" required><br>
+
+                    <label for="register_password">Password: </label><br>
+                    <input type="password" id="register_password" name="password" required><br>
+
+                    <label for="confirm_password">Confirm Password: </label><br>
+                    <input type="password" id="confirm_password" name="confirmPassword" required><br><br>
+
+                    <div class="btn-holder">
+                        <button type="submit">Create Account</button>
+                        <button type="button" id="back_to_login">Back to Login</button>
+                        <button type="button" id="close_register">Close</button>
                     </div>
                 </form>
             </div>
