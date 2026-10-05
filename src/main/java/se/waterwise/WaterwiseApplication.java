@@ -1,5 +1,6 @@
 package se.waterwise;
 
+import org.springframework.boot.SpringApplication;
 import se.waterwise.APIs.meteo.*;
 import se.waterwise.APIs.sgu.*;
 
@@ -13,7 +14,7 @@ public class WaterwiseApplication {
 
 	public static void main(String[] args) {
 
-		//SpringApplication.run(WaterwiseApplication.class, args);
+		SpringApplication.run(WaterwiseApplication.class, args);
 
 //		SguApi sgu = new SguApi();
 //		try {
