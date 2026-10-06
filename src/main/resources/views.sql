@@ -37,6 +37,6 @@ CREATE VIEW TotalConsumption AS
         ON u.Userid = c.Userid
     LEFT JOIN WaterData w
         ON c.Activity = w.Activity
-    GROUP BY c.Userid;
+    GROUP BY u.Userid;
 
 --Gör en view för total konsumption över alla användare per kommun/totalt
