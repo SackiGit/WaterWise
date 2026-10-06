@@ -31,4 +31,10 @@ public class HomeController {
             return "AboutUs";
         }
     }
+    @GetMapping("/forecast")
+    public String showForecast(Model model, HttpSession session) {
+        Object username = session.getAttribute("username");
+        model.addAttribute("username", username);
+        return "forecast";
+    }
 }

@@ -7,25 +7,25 @@ const register_form = document.getElementById('register_form')
 const back_to_login = document.getElementById('back_to_login')
 const close_register = document.getElementById('close_register')
 
-open_login.addEventListener('click', () => {
+open_login?.addEventListener('click', () => {
     popup_container.classList.add('show');
 });
 
-close_login.addEventListener('click', () => {
+close_login?.addEventListener('click', () => {
     popup_container.classList.remove('show');
 });
 
-create_account.addEventListener('click',()=> {
+create_account?.addEventListener('click',()=> {
 login_form.style.display = 'none';
 register_form.style.display='block';
 });
 
-back_to_login.addEventListener('click',()=> {
+back_to_login?.addEventListener('click',()=> {
 register_form.style.display='none';
 login_form.style.display = 'block';
 });
 
-close_register.addEventListener('click', () => {
+close_register?.addEventListener('click', () => {
     popup_container.classList.remove('show');
 });
 
