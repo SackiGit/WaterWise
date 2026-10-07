@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.waterwise.database.WaterRepository;
-
+import org.springframework.security.crypto.bcrypt.*;
 import java.util.Map;
 
 @Controller
 public class LoginController {
     private final WaterRepository waterRepository;
-
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     public LoginController(WaterRepository waterRepository) {
         this.waterRepository = waterRepository;
     }
@@ -32,7 +32,8 @@ public class LoginController {
             System.out.println("Passwords do not match");
             return "redirect:/";
         }
-        waterRepository.createUser(username,password);
+        String encryptedPassword = passwordEncoder.encode(password);
+        waterRepository.createUser(username,encryptedPassword);
         Map<String, Object> newUser =
                 waterRepository.findUser(username);
         Integer userId = (Integer) newUser.get("userid");
@@ -63,7 +64,7 @@ public class LoginController {
         String storedPassword =
                 (String) user.get("userpassword");
 
-        if (!storedPassword.equals(password)) {
+        if (!passwordEncoder.matches(password, storedPassword)) {
             System.out.println("Wrong password");
             return "redirect:/";
         }

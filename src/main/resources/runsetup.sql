@@ -21,15 +21,3 @@ SET client_min_messages TO NOTICE; -- More talk
 
  --\ir triggers.sql
 
-
---Tests
-\echo Daily
-SELECT * FROM DailyConsumption
-WHERE Userid=1 AND Datum='2026-08-10';
-\echo Total
-SELECT * FROM TotalConsumption
-WHERE Userid=1;
-\echo TestTrigger
-INSERT INTO Users(UserName,UserPassword) VALUES ('adam', '123');
-SELECT * FROM Users;
-SELECT * FROM ConsMinutes;

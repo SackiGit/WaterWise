@@ -30,7 +30,7 @@ CREATE VIEW DailyConsumption AS
 
 CREATE VIEW TotalConsumption AS 
   SELECT 
-  c.Userid,
+  u.Userid,
   COALESCE(SUM(c.Duration * w.Consumption),0) AS TotalLitres
     FROM Users u
     Left JOIN ConsMinutes c

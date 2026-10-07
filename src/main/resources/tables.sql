@@ -1,15 +1,14 @@
 CREATE TABLE Users(
     Userid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     UserName TEXT NOT NULL UNIQUE,
-    UserPassword TEXT NOT NULL
-    --Kanske kommun så man kan få ut all data på en viss kommun.
+    UserPassword TEXT NOT NULL,
+    Municipality TEXT
 );
 
 CREATE TABLE WaterData(
     Activity TEXT PRIMARY KEY,
     Duration INT NOT NULL,
     Consumption INT NOT NULL
-    --maybe change waterdata depending on how the actual numbers look.
 );
 
 CREATE TABLE ConsMinutes(
