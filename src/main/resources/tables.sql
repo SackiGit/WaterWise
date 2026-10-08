@@ -2,7 +2,7 @@ CREATE TABLE Users(
     Userid INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     UserName TEXT NOT NULL UNIQUE,
     UserPassword TEXT NOT NULL,
-    Municipality TEXT
+    Municipality TEXT NOT NULL
 );
 
 CREATE TABLE WaterData(

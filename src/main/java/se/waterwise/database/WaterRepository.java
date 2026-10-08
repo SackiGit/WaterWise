@@ -86,11 +86,11 @@ public class WaterRepository {
         return users.get(0);
     }
 
-    public void createUser(String username, String password){
+    public void createUser(String username, String password, String municipality){
         String sql = """
-                INSERT INTO Users (UserName, UserPassword)
-                VALUES (?,?)
+                INSERT INTO Users (UserName, UserPassword, Municipality)
+                VALUES (?,?,?)
                 """;
-        jdbcTemplate.update(sql,username,password);
+        jdbcTemplate.update(sql,username,password,municipality);
     }
 }

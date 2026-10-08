@@ -20,6 +20,7 @@ public class LoginController {
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String confirmPassword,
+            @RequestParam String municipality,
             HttpSession session) {
         Map<String, Object> user =
             waterRepository.findUser(username);
@@ -33,7 +34,7 @@ public class LoginController {
             return "redirect:/";
         }
         String encryptedPassword = passwordEncoder.encode(password);
-        waterRepository.createUser(username,encryptedPassword);
+        waterRepository.createUser(username,encryptedPassword,municipality);
         Map<String, Object> newUser =
                 waterRepository.findUser(username);
         Integer userId = (Integer) newUser.get("userid");
@@ -44,6 +45,7 @@ public class LoginController {
         System.out.println("Account created");
         System.out.println("User ID:"+userId);
         System.out.println("Username: "+username);
+
 
         return "redirect:/";
     }
