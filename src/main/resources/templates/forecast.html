@@ -42,10 +42,37 @@
 </div>
 
 
-<main>
+<main class="forecast-main">
+    <section class="rain-panel">
+        <h2>Rain forecast</h2>
+        <p class="forecast-subtitle">
+            Gothenburg · 7 days, including today
+        </p>
 
-    <h1>API</h1>
+        <p id="forecast-status" role="status">
+            Loading forecast...
+        </p>
 
+        <div id="forecast-content" hidden>
+            <div class="forecast-summary">
+                <div class="summary-card">
+                    <span>Total expected rainfall</span>
+                    <strong id="total-rain">—</strong>
+                    <small>Over the forecast period</small>
+                </div>
+
+                <div class="summary-card">
+                    <span>Wettest day</span>
+                    <strong id="wettest-day">—</strong>
+                    <small id="wettest-amount">—</small>
+                </div>
+            </div>
+
+            <div class="rain-chart-container">
+                <canvas id="rainChart"></canvas>
+            </div>
+        </div>
+    </section>
 </main>
 
 
@@ -92,6 +119,8 @@
 </div>
 
 <script src="/Scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/GraphGen.js"></script>
 
 </body>
 
