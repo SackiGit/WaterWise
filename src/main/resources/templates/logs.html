@@ -124,7 +124,9 @@
         </tr>
         </tbody>
     </table>
-
+<div  class="chart-container">
+    <canvas id="activityChart"></canvas>
+</div>
 </main>
 
 
@@ -175,8 +177,12 @@
             </form>
         </div>
     </div>
-        
-<script src="/Scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script th:inline="javascript">
+       window.activityConsumption = /*[[${activityConsumption}]]*/ [];
+   </script>
+    <script src="/LogGraphs.js"></script>
+    <script src="/Scripts.js"></script>
 
 </body>
 

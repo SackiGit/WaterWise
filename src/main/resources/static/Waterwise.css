@@ -476,3 +476,10 @@ footer {
         font-size: 23px;
     }
 }
+.chart-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    height: 400px;
+    margin: 30px auto;
+}
