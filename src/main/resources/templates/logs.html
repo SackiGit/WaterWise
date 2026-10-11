@@ -81,6 +81,13 @@
         <button type="submit">Add log</button>
 
     </form>
+    <h2> Import water logs from CSV</h2>
+    <form action="/logs/addCSV" method="post" enctype="multipart/form-data">
+        <label for="csvFile"> Choose CSV file</label>
+        <input type="file" id="csvFile" name="file" accept=".csv" required>
+        <br><br>
+        <button type="submit">Import CSV</button>
+    </form>
     <table>
         <thead>
         <tr>
@@ -90,6 +97,7 @@
         </thead>
 
         <tbody>
+
         <tr th:each="row : ${consumption}">
             <td th:text="${row['datum']}"></td>
             <td th:text="${row['totallitres']} + ' L'"></td>
@@ -127,6 +135,9 @@
 <div  class="chart-container">
     <canvas id="activityChart"></canvas>
 </div>
+    <div  class="chart-container">
+        <canvas id="totalChart"></canvas>
+    </div>
 </main>
 
 
@@ -181,7 +192,12 @@
    <script th:inline="javascript">
        window.activityConsumption = /*[[${activityConsumption}]]*/ [];
    </script>
+    <script th:inline="javascript">
+        window.totalData = /*[[${consumption}]]*/ [];
+    </script>
     <script src="/LogGraphs.js"></script>
+    <script src="/TotLogGraph.js"></script>
+
     <script src="/Scripts.js"></script>
 
 </body>

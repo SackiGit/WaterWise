@@ -93,4 +93,10 @@ public class WaterRepository {
                 """;
         jdbcTemplate.update(sql,username,password,municipality);
     }
-}
+    public void addCsv(int userId, int duration, LocalDate date){
+        String sql = """
+                Insert INTO ConsMinutes (Userid, Activity, Duration, Datum)
+                VALUES(?,'Other',?,?)
+                """;
+        jdbcTemplate.update(sql,userId,duration,date);
+    }}
