@@ -268,6 +268,7 @@ footer {
 
 .question-group {
     margin-bottom: 20px;
+    width:90%;
 }
 
 .question-group label {
@@ -289,7 +290,6 @@ footer {
     outline: none;
     cursor: pointer;
 }
-
 
 #calculator-form {
     background: #e0e0e0;
@@ -482,4 +482,105 @@ footer {
     max-width: 900px;
     height: 400px;
     margin: 30px auto;
+}
+
+
+/* Logs page */
+
+.log-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.log-card h2 {
+    margin-top: 0;
+    color: #0b3c5d;
+    font-size: 30px;
+    margin-bottom: 16px;
+}
+
+.log-card select,
+.log-card input[type="number"],
+.log-card input[type="date"],
+.log-card input[type="file"] {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #cce3f6;
+    background-color: #f8fafc;
+    font-size: 14px;
+    color: #333333;
+
+    margin-top: 4px;
+}
+
+.log-card label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.log-card button[type="submit"] {
+    background-color: #0b3c5d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.log-card button[type="submit"]:hover {
+    background-color: #1d6fa5;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.log-card table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+}
+
+.log-card th, 
+.log-card td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.log-card th {
+    background-color: #f8fafc;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.log-card tr:hover {
+    background-color: #f8fafc;
+}
+
+.logs-content-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.logs-content-container > .total-consumption-card,
+.logs-content-container > .log-card:has(form[action="/logs"]) {
+    grid-column: span 2;
 }

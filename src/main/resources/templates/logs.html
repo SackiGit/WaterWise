@@ -41,103 +41,150 @@
     </div>
 
 
-<main>
+<main class="logs-content-container">
 
-    <h1>Water consumption logs</h1>
-    <h2>
-        Total consumption:
-        <span th:text="${total['totallitres']}"></span> L
-    </h2>
-    <h2>Add water usage</h2>
-
-    <form action="/logs/add" method="post">
-
-        <label for="activity">Activity:</label>
-
-        <select name="activity" id="activity">
-            <option value="Shower">Shower, minutes</option>
-            <option value="Faucet">Faucet, minutes</option>
-            <option value="Washing machine">Washing machine, loads</option>
-            <option value="Washing machine eco program">Washing machine eco, loads</option>
-            <option value="Toilet regular flush">Toilet regular flush, amount</option>
-            <option value="Toilet small flush">Toilet small flush, amount </option>
-            <option value="Dishwasher">Dishwasher, loads</option>
-            <option value="Dishwasher eco program">Dishwasher eco, loads</option>
-            <option value="Other">Other, litres</option>
-        </select>
-
-        <br><br>
-
-        <label for="duration">Duration / amount:</label>
-        <input type="number" name="duration" id="duration" min="1" required>
-
-        <br><br>
-
-        <label for="date">Date:</label>
-        <input type="date" name="date" id="date" required>
-
-        <br><br>
-
-        <button type="submit">Add log</button>
-
-    </form>
-    <h2> Import water logs from CSV</h2>
-    <form action="/logs/addCSV" method="post" enctype="multipart/form-data">
-        <label for="csvFile"> Choose CSV file</label>
-        <input type="file" id="csvFile" name="file" accept=".csv" required>
-        <br><br>
-        <button type="submit">Import CSV</button>
-    </form>
-    <table>
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Water consumption</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <tr th:each="row : ${consumption}">
-            <td th:text="${row['datum']}"></td>
-            <td th:text="${row['totallitres']} + ' L'"></td>
-        </tr>
-        </tbody>
-    </table>
-    <form action="/logs" method="get">
-        <label for="date">FromDate:</label>
-        <input type="date" name="startDate" id="startDate" required>
-
-        <label for="date">ToDate:</label>
-        <input type="date" name="endDate" id="endDate" required>
-
-        <br><br>
-
-        <button type="submit">Show data</button>
-
-    </form>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Activity</th>
-            <th>Water consumption</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="row : ${activityConsumption}">
-            <td th:text="${row['activity']}"></td>
-            <td th:text="${row['totallitres']} + ' L'"></td>
-        </tr>
-        </tbody>
-    </table>
-<div  class="chart-container">
-    <canvas id="activityChart"></canvas>
-</div>
-    <div  class="chart-container">
-        <canvas id="totalChart"></canvas>
+    <!-- Total Consumption Banner Card -->
+    <div class="log-card total-consumption-card">
+        <h2>
+            Total consumption:
+            <span th:text="${total['totallitres']}"></span> L
+        </h2>
     </div>
+
+    <!-- Forms Grid Container -->
+    <div class="logs-grid">
+        
+        <!-- Add Water Usage Card -->
+        <div class="log-card">
+            <h2>Add water usage</h2>
+
+            <form action="/logs/add" method="post" class="styled-form">
+
+                <div class="question-group">
+                    <label for="activity">Activity:</label>
+                    <select name="activity" id="activity">
+                        <option value="Shower">Shower, minutes</option>
+                        <option value="Faucet">Faucet, minutes</option>
+                        <option value="Washing machine">Washing machine, loads</option>
+                        <option value="Washing machine eco program">Washing machine eco, loads</option>
+                        <option value="Toilet regular flush">Toilet regular flush, amount</option>
+                        <option value="Toilet small flush">Toilet small flush, amount </option>
+                        <option value="Dishwasher">Dishwasher, loads</option>
+                        <option value="Dishwasher eco program">Dishwasher eco, loads</option>
+                        <option value="Other">Other, litres</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <label for="duration">Duration / amount:</label>
+                    <input type="number" name="duration" id="duration" min="1" required>
+                </div>
+
+                <div class="question-group">
+                    <label for="date">Date:</label>
+                    <input type="date" name="date" id="date" required>
+                </div>
+
+                <button type="submit" class="action-btn">Add log</button>
+
+            </form>
+        </div>
+
+        <!-- Stack Container for Import and Filter Forms -->
+        <div class="log-stack">
+            
+            <!-- Import CSV Card -->
+            <div class="log-card">
+                <h2> Import water logs from CSV</h2>
+                <form action="/logs/addCSV" method="post" enctype="multipart/form-data" class="styled-form">
+                    <div class="question-group">
+                        <label for="csvFile"> Choose CSV file</label>
+                        <input type="file" id="csvFile" name="file" accept=".csv" required>
+                    </div>
+                    <button type="submit" class="action-btn">Import CSV</button>
+                </form>
+            </div>
+
+            <!-- Filter Date Range Card -->
+            <div class="log-card">
+                <form action="/logs" method="get" class="styled-form">
+                    <div class="inline-group">
+                        <div class="question-group">
+                            <label for="startDate">FromDate:</label>
+                            <input type="date" name="startDate" id="startDate" required>
+                        </div>
+                        <div class="question-group">
+                            <label for="endDate">ToDate:</label>
+                            <input type="date" name="endDate" id="endDate" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="action-btn">Show data</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Tables Grid Section -->
+    <div class="logs-grid tables-grid">
+        <!-- Table 1 Card -->
+        <div class="log-card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Water consumption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="row : ${consumption}">
+                            <td th:text="${row['datum']}"></td>
+                            <td th:text="${row['totallitres']} + ' L'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Chart 1 Card -->
+        <div class="log-card">
+            <div class="chart-container">
+                <canvas id="totalChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Table 2 Card -->
+        <div class="log-card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Water consumption</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="row : ${activityConsumption}">
+                            <td th:text="${row['activity']}"></td>
+                            <td th:text="${row['totallitres']} + ' L'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Chart 2 Card -->
+        <div class="log-card">
+            <div class="chart-container">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
 </main>
 
 
