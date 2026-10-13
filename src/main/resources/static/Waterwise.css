@@ -476,6 +476,105 @@ footer {
         font-size: 23px;
     }
 }
+.groundwater-card {
+    --groundwater-accent: #0284c7;
+    --groundwater-tint: #e0f2fe;
+
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 24px;
+
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid var(--groundwater-accent);
+    border-radius: 16px;
+
+    background: #ffffff;
+    color: #0f172a;
+
+    box-shadow: 0 4px 16px rgb(15 23 42 / 6%);
+}
+ /*Groundwater chart*/
+.groundwater-card[data-state="low"] {
+    --groundwater-accent: #b45309;
+    --groundwater-tint: #fef3c7;
+}
+
+.groundwater-card[data-state="normal"] {
+    --groundwater-accent: #15803d;
+    --groundwater-tint: #dcfce7;
+}
+
+.groundwater-card[data-state="high"] {
+    --groundwater-accent: #0369a1;
+    --groundwater-tint: #e0f2fe;
+}
+
+.groundwater-card h2 {
+    margin: 0 0 6px;
+    font-size: 1.4rem;
+}
+
+.groundwater-location {
+    margin: 0 0 16px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.groundwater-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    background: var(--groundwater-tint);
+    color: var(--groundwater-accent);
+
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.groundwater-value {
+    margin: 16px 0 0;
+    line-height: 1.2;
+}
+
+.groundwater-value strong {
+    color: var(--groundwater-accent);
+    font-size: 3.5rem;
+}
+
+.groundwater-value span {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.groundwater-caption {
+    margin: 4px 0 16px;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+#groundwater-message {
+    margin: 0 0 16px;
+    line-height: 1.6;
+}
+
+.groundwater-details {
+    color: #64748b;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.groundwater-source {
+    margin-bottom: 0;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+
+#groundwater-status {
+    color: #64748b;
+}
 .chart-container {
     position: relative;
     width: 80%;

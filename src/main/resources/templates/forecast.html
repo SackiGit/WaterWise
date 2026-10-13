@@ -38,11 +38,46 @@
             </form>
         </div>
     </header>
-    <h1>Rain forecast</h1>
+    <h1>Forecast</h1>
 </div>
 
 
 <main class="forecast-main">
+    <section
+            class="groundwater-card"
+            aria-labelledby="groundwater-title"
+    >
+        <h2 id="groundwater-title">Local groundwater</h2>
+
+        <p class="groundwater-location">
+            Gothenburg
+        </p>
+
+        <p id="groundwater-status" role="status">
+            Loading groundwater data...
+        </p>
+
+        <div id="groundwater-content" hidden>
+        <span
+                id="groundwater-badge"
+                class="groundwater-badge"
+        ></span>
+
+            <p class="groundwater-value">
+                <strong id="groundwater-value"></strong>
+                <span>/ 100</span>
+
+
+            <p id="groundwater-message"></p>
+
+            <p
+                    id="groundwater-updated"
+                    class="groundwater-details"
+            ></p>
+
+
+        </div>
+    </section>
     <section class="rain-panel">
         <h2>Rain forecast</h2>
         <p class="forecast-subtitle">
