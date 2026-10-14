@@ -43,10 +43,31 @@ async function loadRainForecast() {
         forecast.sort((a, b) => a.date.localeCompare(b.date));
 
         // Calculate the summary cards.
-        const totalRain = forecast.reduce(
+       const totalRain = forecast.reduce(
             (total, day) => total + day.rain,
             0
         );
+
+        //temp values
+        //const totalRain = 8;
+
+        let rainMessage;
+
+        if (totalRain < 1) {
+            rainMessage = "No rain is excpected this week." + " Be considerate with water usage."
+        }
+
+        else if (totalRain < 5) {
+            rainMessage = "Little rain is excpected this week." + " Avoid unnecessary watering of garden."
+        }
+        else if (totalRain < 25) {
+            rainMessage = "There will be some rain this week." + " Watering your garden may not be needed, check the soil first."
+        }
+        else {
+            rainMessage = "Plenty of rain is excpected this week" + " The soil will get enough water, you will not have to water the garden this week."
+        }
+
+        document.getElementById("rain-message").textContent = rainMessage;
 
         const wettestDay = forecast.reduce((wettest, day) =>
             day.rain > wettest.rain ? day : wettest
