@@ -47,7 +47,7 @@
                             padding: 12,
                             callbacks: {
                                 label: function(context){
-                                return `Consumption: ${context.parsed.y} L`;
+                                return `${context.parsed.y} L`;
                                 }
                             }
 

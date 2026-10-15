@@ -21,3 +21,9 @@ CREATE TABLE ConsMinutes(
     FOREIGN KEY (Activity) REFERENCES WaterData(Activity)
 );
 
+CREATE TABLE MunicipalityCoords(
+    Municipality TEXT NOT NULL PRIMARY KEY,
+    Lat DEC(30,20) NOT NULL,
+    Long DEC(30,20) NOT NULL
+)
+

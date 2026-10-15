@@ -47,7 +47,7 @@
                             padding: 12,
                             callbacks: {
                                 label: function(context){
-                                return `Consumption: ${context.parsed.y} L`;
+                                return `${context.parsed.y} L`;
                                 }
                             }
 
@@ -92,7 +92,39 @@
                     }
                 }
             });
+    const pieChartElement = document.getElementById("activityPieChart");
 
+    if(!pieChartElement) return;
+    const activities = window.activityConsumption || [];
+    const pieLabels = activities.map(row => row.activity);
+    const pieValues = activities.map(row => Number(row.totallitres));
+    new Chart(pieChartElement, {
+        type: "pie",
 
+        data: {
+            labels: pieLabels,
+            datasets: [{
+                label: "Water consumption",
+                data: pieValues
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    callbacks:{
+                        label: function(context){
+                            const values = context.dataset.data;
+                            const total = values.reduce((sum,value) => sum + value, 0);
+                            const percentage = (context.parsed / total) * 100;
+
+                            return percentage.toFixed(1) + "%";
+                        }
+                    }
+                }
+            }
+        }
+    });
 }
+
+
 loadActivityChart();
