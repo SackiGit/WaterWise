@@ -134,14 +134,15 @@
               class="login-form">
 
             <h3>Change municipality</h3>
-
-            <label for="account_municipality">Kommun:</label><br>
+            <p>Current municipality: <strong th:text="${session.municipality}"></strong></p>
+            <label for="account_municipality">Municipality:</label><br>
             <select name="municipality"
                     id="account_municipality"
                     required>
-                <option value="göteborg">Göteborg</option>
-                <option value="stockholm">Stockholm</option>
+                <option value="göteborg" th:selected="${session.municipality=='göteborg'}">Göteborg</option>
+                <option value="stockholm" th:selected="${session.municipality=='stockholm'}">Stockholm</option>
             </select>
+
 
             <br><br>
             <button type="submit">Save municipality</button>

@@ -41,6 +41,7 @@ public class LoginController {
 
         session.setAttribute("userId",userId);
         session.setAttribute("username",username);
+        session.setAttribute("municipality",municipality);
 
         System.out.println("Account created");
         System.out.println("User ID:"+userId);
@@ -49,6 +50,7 @@ public class LoginController {
 
         return "redirect:/";
     }
+
     @PostMapping("/login")
     public String login(
             @RequestParam String username,
@@ -71,12 +73,15 @@ public class LoginController {
             return "redirect:/";
         }
         Integer userId = (Integer) user.get("userid");
+        String municipality = (String) user.get("municipality");
 
         session.setAttribute("userId",userId);
         session.setAttribute("username",username);
+        session.setAttribute("municipality",municipality);
 
         System.out.println("Login successful!");
         System.out.println("User ID: " + userId);
+        System.out.println("Municipality: " + municipality);
 
         return "redirect:/";
     }
@@ -85,4 +90,53 @@ public class LoginController {
         session.invalidate();
         return "redirect:/";
 }
+
+@PostMapping("/account/municipality")
+    public String changeMunicipality(
+            @RequestParam String municipality,
+            HttpSession session){
+        Integer userId = (Integer) session.getAttribute("userId");
+
+
+        if(userId == null){
+            return "redirect:/";
+        }
+        waterRepository.changeMunicipality(municipality, userId);
+        session.setAttribute("municipality", municipality);
+
+        return "redirect:/";
+    }
+    @PostMapping("/account/password")
+    public  String changePassword(
+            @RequestParam String currentPassword,
+            @RequestParam String newPassword,
+            @RequestParam String confirmPassword,
+            HttpSession session) {
+
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/";
+        }
+        Map<String, Object> user =
+                waterRepository.findUser((String)session.getAttribute("username"));
+
+
+        String storedPassword =
+                (String) user.get("userpassword");
+
+        if (!passwordEncoder.matches(currentPassword, storedPassword)) {
+            System.out.println("Wrong password");
+            return "redirect:/";
+        }
+        if(!newPassword.equals(confirmPassword)) {
+            System.out.println("Passwords do not match");
+            return "redirect:/";
+        }
+        String encryptedPassword = passwordEncoder.encode(newPassword);
+        waterRepository.updateUser(encryptedPassword,userId);
+
+        return "redirect:/";
+    }
 }
