@@ -28,10 +28,12 @@
                                 th:if="${username == null}">
                             Login
                         </button>
-                        <span class="username"
-                              th:if="${username != null}"
-                              th:text="${username}">
-                        </span>
+                        <button type="button"
+                                class="username"
+                                id="open_account_settings"
+                                th:if="${username != null}"
+                                th:text="${username}">
+                        </button>
                         <form action="/logout" method="post" th:if="${username !=null}">
                             <button type="submit" class="logout-button">Logout</button>
                         </form>
@@ -52,10 +54,10 @@
                             <div class="question-group">
                                 <label for="shower">Shower Duration & Frequency</label>
                                 <select id="shower">
-                                    <option value="10">Short shower (~5 mins)</option>
-                                    <option value="20" selected>Average shower (~10 mins)</option>
-                                    <option value="35">Long shower (~15+ mins)</option>
-                                    <option value="50">Multiple / Extra long showers</option>
+                                    <option value="50">Short shower (~5 mins)</option>
+                                    <option value="100" selected>Average shower (~10 mins)</option>
+                                    <option value="150">Long shower (~15+ mins)</option>
+                                    <option value="200">Multiple / Extra long showers</option>
                                 </select>
                                 <div class="field-hint">Based on standard ~8 Lpm showerhead output</div>
                             </div>
@@ -64,9 +66,9 @@
                             <div class="question-group">
                                 <label for="toilet">Daily Toilet Flushes (Per Person)</label>
                                 <select id="toilet">
-                                    <option value="6">Low flush (3-4 flushes)</option>
-                                    <option value="12" selected>Standard (5-6 flushes)</option>
-                                    <option value="20">Frequent (7+ flushes or older toilet)</option>
+                                    <option value="21">Low flush (3-4 flushes)</option>
+                                    <option value="33" selected>Standard (5-6 flushes)</option>
+                                    <option value="45">Frequent (7+ flushes or older toilet)</option>
                                 </select>
                             </div>
 
@@ -84,8 +86,8 @@
                             <div class="question-group">
                                 <label for="dishes">Dishwashing Method & Frequency</label>
                                 <select id="dishes">
-                                    <option value="4">EnergyStar Dishwasher (Full load)</option>
-                                    <option value="10" selected>Standard Dishwasher / Quick handwash</option>
+                                    <option value="7">Eco Dishwasher (Full load)</option>
+                                    <option value="11" selected>Standard Dishwasher / Quick handwash</option>
                                     <option value="24">Handwashing with tap running</option>
                                 </select>
                             </div>
@@ -94,10 +96,10 @@
                             <div class="question-group">
                                 <label for="laundry">Laundry Loads (Per Week)</label>
                                 <select id="laundry">
-                                    <option value="3">1-2 loads per week</option>
-                                    <option value="7" selected>3-4 loads per week</option>
-                                    <option value="14">5-7 loads per week</option>
-                                    <option value="22">8+ loads per week</option>
+                                    <option value="11">1-2 loads per week</option>
+                                    <option value="22" selected>3-4 loads per week</option>
+                                    <option value="45">5-7 loads per week</option>
+                                    <option value="80">8+ loads per week</option>
                                 </select>
                             </div>
 
@@ -210,6 +212,70 @@
                 </form>
             </div>
                 </div>
+            <div class="popup-container" id="account_settings_popup">
+                <div class="login-box">
+                    <h2>Account Settings</h2>
+
+                    <form action="/account/municipality"
+                          method="post"
+                          class="login-form">
+
+                        <h3>Change municipality</h3>
+                        <p>Current municipality: <strong th:text="${session.municipality}"></strong></p>
+                        <label for="account_municipality">Municipality:</label><br>
+                        <select name="municipality"
+                                id="account_municipality"
+                                required>
+                            <option value="göteborg" th:selected="${session.municipality=='göteborg'}">Göteborg</option>
+                            <option value="stockholm" th:selected="${session.municipality=='stockholm'}">Stockholm</option>
+                        </select>
+
+
+                        <br><br>
+                        <button type="submit">Save municipality</button>
+                    </form>
+
+                    <hr>
+
+                    <form action="/account/password"
+                          method="post"
+                          class="login-form">
+
+                        <h3>Change password</h3>
+
+                        <label for="current_password">Current password:</label><br>
+                        <input type="password"
+                               id="current_password"
+                               name="currentPassword"
+                               required>
+
+                        <br>
+
+                        <label for="new_password">New password:</label><br>
+                        <input type="password"
+                               id="new_password"
+                               name="newPassword"
+                               required>
+
+                        <br>
+
+                        <label for="confirm_new_password">Confirm new password:</label><br>
+                        <input type="password"
+                               id="confirm_new_password"
+                               name="confirmPassword"
+                               required>
+
+                        <br><br>
+                        <button type="submit">Change password</button>
+                    </form>
+
+                    <br>
+                    <button type="button" id="close_account_settings">
+                        Close
+                    </button>
+                </div>
+            </div>
+            <script src="/AccountSettings.js"></script>
 
             <script src="/Scripts.js"></script>
     </body>

@@ -17,6 +17,7 @@ INSERT INTO WaterData VALUES ('Dishwasher eco program',1,7);
 
 INSERT INTO WaterData VALUES ('Other',1,1);
 
+INSERT INTO MunicipalityCoords VALUES('Göteborg', 57.79032135129441, 11.98393584590727)
 
 
 

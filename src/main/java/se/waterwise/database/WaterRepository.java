@@ -71,7 +71,7 @@ public class WaterRepository {
 
     public Map<String, Object> findUser(String username) {
         String sql = """
-            SELECT Userid, UserName, UserPassword
+            SELECT Userid, UserName, UserPassword, Municipality
             FROM Users
             WHERE UserName = ?
             """;
@@ -95,8 +95,23 @@ public class WaterRepository {
     }
     public void addCsv(int userId, int duration, LocalDate date){
         String sql = """
-                Insert INTO ConsMinutes (Userid, Activity, Duration, Datum)
+                INSERT INTO ConsMinutes (Userid, Activity, Duration, Datum)
                 VALUES(?,'Other',?,?)
                 """;
         jdbcTemplate.update(sql,userId,duration,date);
-    }}
+    }
+    public void changeMunicipality(String municipality, int userId){
+        String sql = """
+                UPDATE Users SET Municipality = ?
+                WHERE Userid = ?
+                """;
+        jdbcTemplate.update(sql, municipality, userId);
+    }
+    public void updateUser(String password, int userId){
+        String sql = """
+                UPDATE Users SET UserPassword = ?
+                WHERE Userid = ?
+                """;
+        jdbcTemplate.update(sql,password, userId);
+    }
+}
