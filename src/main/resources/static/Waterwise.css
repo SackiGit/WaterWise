@@ -180,7 +180,9 @@ footer {
     align-items: center;
 
 }
+/*popups*/
 
+/*login popup*/
 .popup-container{
     background-color: rgba(148, 148, 148, 0.411);
     display: flex;
@@ -212,7 +214,61 @@ footer {
     border-radius: 10px;
 }
 
+/*Recomendation popup*/
 
+/* Container overlay (centered popup) */
+.recomendation-popup-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+/* Main popup box */
+.recomendation-box {
+    position: relative;
+    background: #ffffff;
+    color: #323232;
+    padding: 5px 20px 15px 20px;
+    margin:0 0 20px 10px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    pointer-events: auto;
+}
+
+.recomendation-box h2 {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #0b3c5dd5;
+}
+
+/* Close button */
+.close-recomendation {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #a4a4a4;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.close-recomendation:hover {
+    color: #000;
+    background-color: #f0f0f0;
+}
+
+.recomendation-popup-container.hide{
+    opacity: 0;
+    pointer-events: none;
+}
 
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -373,7 +429,25 @@ footer {
 .logs-main h1{
     color: white;
 }
+
+
 /* Forecast page */
+.forecast-navbar{
+    position: relative;
+    background-image: linear-gradient(rgba(11, 60, 93, 0.75), rgba(11, 60, 93, 0.85)), url('Forecast-image.jpg');
+    background-size: cover;
+    background-position: center 75%;
+    background-repeat: no-repeat;
+    height: 30vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forecast-navbar h1{
+    color: white;
+}
 
 .forecast-main {
     padding: 32px 16px;
@@ -686,6 +760,22 @@ footer {
 
 
 /* About Us Page */
+.about-navbar{
+    position: relative;
+    background-image: linear-gradient(rgba(11, 60, 93, 0.75), rgba(11, 60, 93, 0.85)), url('aboutus-image.jpg');
+    background-size: cover;
+    background-position: center 75%;
+    background-repeat: no-repeat;
+    height: 30vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-navbar h1{
+    color: white;
+}
 
 .about-main {
     max-width: 1100px;
