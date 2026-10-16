@@ -164,7 +164,9 @@ footer {
     align-items: center;
 
 }
+/*popups*/
 
+/*login popup*/
 .popup-container{
     background-color: rgba(148, 148, 148, 0.411);
     display: flex;
@@ -202,7 +204,61 @@ footer {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/*Recomendation popup*/
 
+/* Container overlay (centered popup) */
+.recomendation-popup-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+/* Main popup box */
+.recomendation-box {
+    position: relative;
+    background: #ffffff;
+    color: #323232;
+    padding: 5px 20px 15px 20px;
+    margin:0 0 20px 10px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    pointer-events: auto;
+}
+
+.recomendation-box h2 {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #0b3c5dd5;
+}
+
+/* Close button */
+.close-recomendation {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #a4a4a4;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.close-recomendation:hover {
+    color: #000;
+    background-color: #f0f0f0;
+}
+
+.recomendation-popup-container.hide{
+    opacity: 0;
+    pointer-events: none;
+}
 
 
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
@@ -364,7 +420,25 @@ footer {
 .logs-main h1{
     color: white;
 }
+
+
 /* Forecast page */
+.forecast-navbar{
+    position: relative;
+    background-image: linear-gradient(rgba(11, 60, 93, 0.75), rgba(11, 60, 93, 0.85)), url('Forecast-image.jpg');
+    background-size: cover;
+    background-position: center 75%;
+    background-repeat: no-repeat;
+    height: 30vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forecast-navbar h1{
+    color: white;
+}
 
 .forecast-main {
     padding: 32px 16px;
@@ -466,6 +540,105 @@ footer {
     .rain-panel .summary-card strong {
         font-size: 23px;
     }
+}
+.groundwater-card {
+    --groundwater-accent: #0284c7;
+    --groundwater-tint: #e0f2fe;
+
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 24px;
+
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid var(--groundwater-accent);
+    border-radius: 16px;
+
+    background: #ffffff;
+    color: #0f172a;
+
+    box-shadow: 0 4px 16px rgb(15 23 42 / 6%);
+}
+ /*Groundwater chart*/
+.groundwater-card[data-state="low"] {
+    --groundwater-accent: #b45309;
+    --groundwater-tint: #fef3c7;
+}
+
+.groundwater-card[data-state="normal"] {
+    --groundwater-accent: #15803d;
+    --groundwater-tint: #dcfce7;
+}
+
+.groundwater-card[data-state="high"] {
+    --groundwater-accent: #0369a1;
+    --groundwater-tint: #e0f2fe;
+}
+
+.groundwater-card h2 {
+    margin: 0 0 6px;
+    font-size: 1.4rem;
+}
+
+.groundwater-location {
+    margin: 0 0 16px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.groundwater-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    background: var(--groundwater-tint);
+    color: var(--groundwater-accent);
+
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.groundwater-value {
+    margin: 16px 0 0;
+    line-height: 1.2;
+}
+
+.groundwater-value strong {
+    color: var(--groundwater-accent);
+    font-size: 3.5rem;
+}
+
+.groundwater-value span {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.groundwater-caption {
+    margin: 4px 0 16px;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+#groundwater-message {
+    margin: 0 0 16px;
+    line-height: 1.6;
+}
+
+.groundwater-details {
+    color: #64748b;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.groundwater-source {
+    margin-bottom: 0;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+
+#groundwater-status {
+    color: #64748b;
 }
 .chart-container {
     position: relative;
@@ -684,3 +857,63 @@ footer {
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
+/* About Us Page */
+.about-navbar{
+    position: relative;
+    background-image: linear-gradient(rgba(11, 60, 93, 0.75), rgba(11, 60, 93, 0.85)), url('aboutus-image.jpg');
+    background-size: cover;
+    background-position: center 75%;
+    background-repeat: no-repeat;
+    height: 30vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-navbar h1{
+    color: white;
+}
+
+.about-main {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.about-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-card h2 {
+    color: #176b87;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.about-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.team-list {
+    padding-left: 20px;
+    line-height: 2;
+    font-size: 16px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 768px) {
+    .about-main {
+        grid-template-columns: 1fr;
+    }
+}
+

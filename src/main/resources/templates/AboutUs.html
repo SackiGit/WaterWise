@@ -1,33 +1,238 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Waterwise</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/Waterwise.css">
-    </head>
-    <body>
-  <header>
-    <div class="nav-container">
-        <a href="/">
-            <img src="/Waterwise-logo.jpg" alt="Waterwise logo" class="logoimage">
-        </a>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Waterwise - About Us</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/Waterwise.css">
+</head>
 
-        <nav>
-            <a href="/watercalculator" class="navitem">Water calculator</a>
-            <a href="/logs" class="navitem">Logs</a>
-            <a href="/about-us" class="navitem">About us</a>
-            <a href="/forecast" class="navitem">Forecast</a>
-        </nav>
+<body>
+
+<div class="about-navbar">
+    <header>
+        <div class="nav-container">
+            <a href="/">
+                <img src="/Waterwise-logo.jpg"
+                     alt="Waterwise logo"
+                     class="logoimage">
+            </a>
+
+            <nav>
+                <a href="/watercalculator" class="navitem">
+                    Water calculator
+                </a>
+                <a href="/logs" class="navitem">Logs</a>
+                <a href="/about-us" class="navitem">About us</a>
+                <a href="/forecast" class="navitem">Forecast</a>
+            </nav>
+
+            <button class="login-button"
+                    id="open_login"
+                    th:if="${username == null}">
+                Login
+            </button>
+
+            <span class="username"
+                  th:if="${username != null}"
+                  th:text="${username}">
+            </span>
+
+            <form action="/logout"
+                  method="post"
+                  th:if="${username != null}">
+                <button type="submit" class="logout-button">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <h1>About Us</h1>
+</div>
+
+<main class="about-main">
+
+    <section class="about-card">
+        <h2>What is Waterwise?</h2>
+
+        <p>
+            Waterwise is an application designed to help
+            users track, monitor, and reduce their water
+            consumption. By providing insights into everyday
+            water usage, we aim to encourage more sustainable
+            habits and raise awareness about the importance
+            of conserving water.
+        </p>
+        <p>
+            Our goal is to combine technology with
+            environmental awareness by developing
+            an accessible application that helps
+            people make informed decisions about
+            their water consumption.
+        </p>
+    </section>
+
+    <section class="about-card">
+        <h2>Why is Saving Water Important?</h2>
+
+        <p>
+            Excessive water consumption can have serious
+            consequences for both the environment and society.
+            Overuse of freshwater resources can contribute
+            to water shortages and damage to ecosystems that
+            depend on rivers, lakes, and wetlands. As climate
+            change brings more frequent and severe droughts
+            to many regions, responsible water management
+            is becoming increasingly important. Even in
+            countries where freshwater is generally abundant,
+            such as Sweden, local water shortages can occur,
+            particularly during dry summer months.
+        </p>
+
+    </section>
+
+    <section class="about-card">
+        <h2>Our Project</h2>
+
+        <p>
+            Waterwise was developed as part of the course
+            DIT257 Agile Software Project Management,
+            taught at the University of Gothenburg
+            and Chalmers University of Technology.
+        </p>
+        <p>
+            We are a team of five students working
+            together to design and develop the application
+            while gaining practical experience in agile
+            software development, teamwork, and project management.
+        </p>
+
+    </section>
+
+    <section class="about-card">
+        <h2>Our Team</h2>
+
+        <p>
+            The application was developed by:
+        </p>
+
+        <ul class="team-list">
+            <li>Daniel Blomdahl</li>
+            <li>Elliot Hagald</li>
+            <li>Oliver Sarac</li>
+            <li>Simon Selin Johansson</li>
+            <li>Simon Edvardsson</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 WaterWise Water Usage Tracker</p>
+</footer>
+
+<div class="recomendation-popup-container" id="recomendation_popup_container">
+    <div class="recomendation-box">
+        <button class="close-recomendation" type="button" id="close_recommendation">X</button>
+        <h2>Watering Recommendation</h2>
+        <p id="recommendation_text">Based on the current weather and groundwater levels, we suggest watering your plants today.</p>
     </div>
-  </header>
+</div>
 
+<div class="popup-container" id="popup_container">
+    <div class="login-box">
 
+        <form action="/login"
+              method="post"
+              class="login-form"
+              id="login_form">
 
-        <footer>
-            <p>© 2026 WaterWise Water Usage Tracker</p>
-        </footer>
-    </body>
+            <h2>Login</h2>
+
+            <label for="username">Username:</label><br>
+            <input type="text"
+                   id="username"
+                   name="username"
+                   required><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password"
+                   id="password"
+                   name="password"
+                   required><br><br>
+
+            <div class="btn-holder">
+                <button type="submit">Login</button>
+                <button type="button" id="create_account">
+                    Create Account
+                </button>
+                <button type="button" id="close_login">
+                    Close
+                </button>
+            </div>
+        </form>
+
+        <form action="/register"
+              method="post"
+              class="login-form"
+              id="register_form"
+              style="display: none;">
+
+            <h2>Create Account</h2>
+
+            <label for="register_username">
+                Username:
+            </label><br>
+            <input type="text"
+                   id="register_username"
+                   name="username"
+                   required><br>
+
+            <label for="register_password">
+                Password:
+            </label><br>
+            <input type="password"
+                   id="register_password"
+                   name="password"
+                   required><br>
+
+            <label for="confirm_password">
+                Confirm Password:
+            </label><br>
+            <input type="password"
+                   id="confirm_password"
+                   name="confirmPassword"
+                   required><br>
+
+            <label for="municipality">
+                Select municipality:
+            </label><br>
+
+            <select name="municipality" id="municipality">
+                <option value="göteborg">Göteborg</option>
+                <option value="stockholm">Stockholm</option>
+            </select><br><br>
+
+            <div class="btn-holder">
+                <button type="submit">
+                    Create Account
+                </button>
+                <button type="button" id="back_to_login">
+                    Back to Login
+                </button>
+                <button type="button" id="close_register">
+                    Close
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script src="/Scripts.js"></script>
+
+</body>
 </html>

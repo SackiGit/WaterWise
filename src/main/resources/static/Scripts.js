@@ -29,6 +29,15 @@ close_register?.addEventListener('click', () => {
     popup_container.classList.remove('show');
 });
 
+// ========== Recommendation Popup ==========
+const close_recommendation = document.getElementById('close_recommendation');
+const recommendation_popup_container = document.getElementById('recomendation_popup_container');
+close_recommendation?.addEventListener('click', () => {
+    recommendation_popup_container.classList.add('hide');
+});
+
+
+
 // ========== Water Calculator ==========
 function updateResults() {
     const shower  = Number(document.getElementById('shower')?.value)  || 0;

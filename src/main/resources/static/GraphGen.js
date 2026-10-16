@@ -43,10 +43,31 @@ async function loadRainForecast() {
         forecast.sort((a, b) => a.date.localeCompare(b.date));
 
         // Calculate the summary cards.
-        const totalRain = forecast.reduce(
+       const totalRain = forecast.reduce(
             (total, day) => total + day.rain,
             0
         );
+
+        //temp values
+        //const totalRain = 8;
+
+        let rainMessage;
+
+        if (totalRain < 1) {
+            rainMessage = "No rain is excpected this week." + " Be considerate with water usage."
+        }
+
+        else if (totalRain < 5) {
+            rainMessage = "Little rain is excpected this week." + " Avoid unnecessary watering of garden."
+        }
+        else if (totalRain < 25) {
+            rainMessage = "There will be some rain this week." + " Watering your garden may not be needed, check the soil first."
+        }
+        else {
+            rainMessage = "Plenty of rain is excpected this week" + " The soil will get enough water, you will not have to water the garden this week."
+        }
+
+        document.getElementById("rain-message").textContent = rainMessage;
 
         const wettestDay = forecast.reduce((wettest, day) =>
             day.rain > wettest.rain ? day : wettest
@@ -192,5 +213,123 @@ async function loadRainForecast() {
             "Could not load the forecast. Please try refreshing the page.";
     }
 }
-
 loadRainForecast();
+
+async function loadGroundwaterBox() {
+    const status = document.getElementById("groundwater-status");
+    const content = document.getElementById("groundwater-content");
+    const card = document.querySelector(".groundwater-card");
+
+    // The shared script might also be loaded on other pages.
+    if (!status || !content || !card) {
+        return;
+    }
+
+    try {
+        const response = await fetch("/api/groundwater/current", {
+            headers: {
+                Accept: "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(
+                `Groundwater request failed: ${response.status}`
+            );
+        }
+        const data = await response.json();
+        //data.level = 50; // Temporary test value
+
+// SGU can return a date such as "2026-10-11Z".
+// Remove the trailing timezone marker for local date formatting.
+        const dateString =
+            typeof data?.date === "string"
+                ? data.date.replace(/Z$/, "")
+                : "";
+
+        if (
+            !data ||
+            !Number.isInteger(data.areaId) ||
+            !Number.isInteger(data.level) ||
+            data.level < 0 ||
+            data.level > 100 ||
+            !/^\d{4}-\d{2}-\d{2}$/.test(dateString)
+        ) {
+            throw new Error("Invalid groundwater data received.");
+        }
+
+        const [year, month, day] = dateString.split("-").map(Number);
+        const date = new Date(year, month - 1, day, 12);
+
+        if (
+            date.getFullYear() !== year ||
+            date.getMonth() !== month - 1 ||
+            date.getDate() !== day
+        ) {
+            throw new Error("Invalid groundwater date received.");
+        }
+
+        let state;
+        let label;
+        let message;
+
+        if (data.level < 25) {
+            state = "low";
+            label = "Low groundwater";
+            message =
+                "Groundwater is low. Please limit unnecessary water use.";
+
+        } else if (data.level < 75) {
+            state = "normal";
+            label = "Normal groundwater";
+            message =
+                "Groundwater is within the normal range. " +
+                "Use water responsibly.";
+
+        } else {
+            state = "high";
+            label = "High groundwater";
+            message =
+                "Groundwater is high. Continue using water responsibly.";
+        }
+
+        card.dataset.state = state;
+
+        document.getElementById("groundwater-value").textContent =
+            data.level;
+
+        document.getElementById("groundwater-badge").textContent =
+            label;
+
+        document.getElementById("groundwater-message").textContent =
+            message;
+
+        const formattedDate = date.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        });
+
+        document.getElementById("groundwater-updated").textContent =
+            `Latest available estimate: ${formattedDate} `;
+
+        content.hidden = false;
+        status.hidden = true;
+
+    } catch (error) {
+        console.error("Could not load groundwater data:", error);
+
+        content.hidden = true;
+        status.hidden = false;
+        status.textContent =
+            "Groundwater data is currently unavailable. " +
+            "Please try refreshing the page.";
+    }
+}
+
+// Works whether the script loads before or after the HTML.
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadGroundwaterBox);
+} else {
+    loadGroundwaterBox();
+}

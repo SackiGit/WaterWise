@@ -138,7 +138,7 @@ public class SguApi {
                 properties.get("datum").asText();
 
         int level =
-                properties.get("fyllnadsgrad_sma").asInt();
+                properties.get("grundvattensituation_sma").asInt();
 
 
         return new GroundWaterData(areaId,date, level);

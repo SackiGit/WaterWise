@@ -18,23 +18,24 @@ public class WaterwiseApplication {
 
 //		SguApi sgu = new SguApi();
 //		try {
-//			GroundWaterData waterData = sgu.getLatestGroundwaterData(57.79032135129441,11.98393584590727);
+//			//GroundWaterData waterData = sgu.getLatestGroundwaterData(57.79032135129441,11.98393584590727);
+//			GroundWaterData waterData = sgu.getLatestGroundwaterData(57.65563455758733,11.888057019277284);
 //			System.out.println(waterData.getLevel());
+//		} catch (Exception e) {
+//			//e.printStackTrace();
+//		}
+
+//		List<RainData> rainList = new ArrayList<>();
+//		OpenMeteoApi weatherApi = new OpenMeteoApi();
+//		try {
+//			rainList = weatherApi.getRainForecast(57.79032135129441,11.98393584590727);
+//			for(RainData data:rainList) {
+//				System.out.println(data.getDate()+": "+data.getRain()+ " mm");
+//			}
+//
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-
-		List<RainData> rainList = new ArrayList<>();
-		OpenMeteoApi weatherApi = new OpenMeteoApi();
-		try {
-			rainList = weatherApi.getRainForecast(57.79032135129441,11.98393584590727);
-			for(RainData data:rainList) {
-				System.out.println(data.getDate()+": "+data.getRain()+ " mm");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 
 	}
