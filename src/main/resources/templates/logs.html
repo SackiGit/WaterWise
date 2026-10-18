@@ -51,6 +51,15 @@
             Total consumption:
             <span th:text="${total['totallitres']}"></span> L
         </h2>
+        <p>
+            Average daily consumption:
+            <strong th:text="${#numbers.formatDecimal(averageDailyConsumption, 1, 2)}"></strong>
+            L/day
+        </p>
+        <p>
+            Days with recorded consumption:
+            <strong th:text="${daysPosted}"></strong>
+        </p>
     </div>
 
     <!-- Forms Grid Container -->
@@ -109,6 +118,27 @@
 
             <!-- Filter Date Range Card -->
             <div class="log-card">
+                <div class="period-presets">
+                    <a th:href="@{/logs(period=1)}"
+                       th:classappend="${period == '1'} ? ' active' : ''">
+                        1 day
+                    </a>
+
+                    <a th:href="@{/logs(period=7)}"
+                       th:classappend="${period == '7'} ? ' active' : ''">
+                        7 days
+                    </a>
+
+                    <a th:href="@{/logs(period=30)}"
+                       th:classappend="${period == '30'} ? ' active' : ''">
+                        30 days
+                    </a>
+
+                    <a th:href="@{/logs}"
+                       th:classappend="${period == 'custom'} ? ' active' : ''">
+                        Custom
+                    </a>
+                </div>
                 <form action="/logs" method="get" class="styled-form">
                     <div class="inline-group">
                         <div class="question-group">
@@ -174,6 +204,8 @@
                         </tr>
                     </tbody>
                 </table>
+
+
             </div>
         </div>
 

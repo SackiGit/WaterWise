@@ -908,7 +908,28 @@ footer {
     line-height: 2;
     font-size: 16px;
 }
+.period-presets {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
 
+.period-presets a {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+}
+
+.period-presets a.active {
+    background: #d9eee4;
+    border-color: #7bb99a;
+    font-weight: bold;
+}
 /* Responsive layout */
 
 @media (max-width: 768px) {

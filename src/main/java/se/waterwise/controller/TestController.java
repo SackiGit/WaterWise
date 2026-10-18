@@ -29,7 +29,8 @@ public class TestController {
     @GetMapping("/logs")
     public String logs(Model model, HttpSession session,
                        @RequestParam(required = false) LocalDate startDate,
-                       @RequestParam(required = false) LocalDate endDate) {
+                       @RequestParam(required = false) LocalDate endDate,
+                       @RequestParam(defaultValue = "7")String period) {
 
         Integer userId = (Integer) session.getAttribute("userId");
 
@@ -44,15 +45,55 @@ public class TestController {
 
         Map<String, Object> total =
                 waterRepository.getTotalConsumption(userId);
+        double totalLitres;
+        if(total.get("totallitres")==null){
+            totalLitres = 0.0;
+        } else{
+            totalLitres= ((Number) total.get("totallitres")).doubleValue();
+        }
+
+
+        int daysPosted = data.size();
+
+        double averageDailyConsumption;
+        if(daysPosted > 0){
+            averageDailyConsumption = totalLitres/daysPosted;
+        } else{
+            averageDailyConsumption=0.0;
+        }
 
         model.addAttribute("total", total);
         model.addAttribute("consumption", data);
+        model.addAttribute("daysPosted", daysPosted);
+        model.addAttribute("averageDailyConsumption", averageDailyConsumption);
+
+        LocalDate today = LocalDate.now();
+        LocalDate selectedStartDate;
+        LocalDate selectedEndDate;
+
         if(startDate != null && endDate != null) {
-            List<Map<String, Object>> activityConsumption =
-                    waterRepository.getConsumptionByActivityByDate(userId, startDate, endDate);
-            System.out.println(activityConsumption);
-            model.addAttribute("activityConsumption", activityConsumption);
-        }
+          selectedStartDate = startDate;
+          selectedEndDate = endDate;
+          period = "custom";
+        } else{
+            selectedEndDate = today;
+            if(period.equals("1")){
+                selectedStartDate = today;
+            } else if(period.equals("30")){
+                selectedStartDate=today.minusDays(29);
+            }else{
+                period="7";
+                selectedStartDate=today.minusDays(6);
+            }
+            }
+
+
+        List<Map<String, Object>> activityConsumption =
+                waterRepository.getConsumptionByActivityByDate(userId, selectedStartDate, selectedEndDate);
+        model.addAttribute("activityConsumption", activityConsumption);
+        model.addAttribute("period",period);
+        model.addAttribute("startDate",selectedStartDate);
+        model.addAttribute("endDate",selectedEndDate);
         return "logs";
     }
 
