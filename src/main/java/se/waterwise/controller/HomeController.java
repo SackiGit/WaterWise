@@ -20,7 +20,6 @@ public class HomeController {
         model.addAttribute("username", username);
         Map<String, Object> recommendation = waterRepository.getRecommendation();
         model.addAttribute("recommendation", recommendation.get("recommendation"));
-        System.out.println(recommendation.get("recommendation"));
 
         return "index";
     }

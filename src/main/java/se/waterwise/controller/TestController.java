@@ -40,6 +40,9 @@ public class TestController {
         Object username = session.getAttribute("username");
         model.addAttribute("username",username);
 
+        Map<String, Object> recommendation = waterRepository.getRecommendation();
+        model.addAttribute("recommendation", recommendation.get("recommendation"));
+
         List<Map<String, Object>> data =
                 waterRepository.getDailyConsumption(userId);
 
