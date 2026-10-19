@@ -7,20 +7,34 @@ import org.springframework.web.server.ResponseStatusException;
 
 import se.waterwise.APIs.sgu.GroundWaterData;
 import se.waterwise.APIs.sgu.SguApi;
+import se.waterwise.database.WaterRepository;
 
 import java.io.IOException;
 
 
+import java.util.Map;
+import jakarta.servlet.http.HttpSession;
+
+
 @RestController
 public class GroundWaterController {
-
+    private final WaterRepository waterRepository;
+    public GroundWaterController(WaterRepository waterRepository) {
+        this.waterRepository = waterRepository;
+    }
     private final SguApi sguApi = new SguApi();
 
     @GetMapping("/api/groundwater/current")
-    public GroundWaterData getCurrentGroundwater() {
+    public GroundWaterData getCurrentGroundwater(HttpSession session) {
+        String municipality = (String) session.getAttribute("municipality");
+
+        Map<String, Object> coords = waterRepository.getCoords(municipality);
+
+        double lat = ((Number) coords.get("Lat")).doubleValue();
+        double lon = ((Number) coords.get("Long")).doubleValue();
         try {
             // Central Gothenburg.
-            return sguApi.getLatestGroundwaterData(57.7089, 11.9746);
+            return sguApi.getLatestGroundwaterData(lat,lon);
 
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();

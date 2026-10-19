@@ -18,6 +18,8 @@ SET client_min_messages TO NOTICE; -- More talk
 \ir inserts.sql
 \ir views.sql
 
-
+ SELECT Lat,Long
+ FROM MunicipalityCoords
+ WHERE Municipality='goteborg';
  --\ir triggers.sql
 

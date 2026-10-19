@@ -35,10 +35,12 @@
                 Login
             </button>
 
-            <span class="username"
-                  th:if="${username != null}"
-                  th:text="${username}">
-            </span>
+            <button type="button"
+                    class="username"
+                    id="open_account_settings"
+                    th:if="${username != null}"
+                    th:text="${username}">
+            </button>
 
             <form action="/logout"
                   method="post"
@@ -138,7 +140,7 @@
     <div class="recomendation-box">
         <button class="close-recomendation" type="button" id="close_recommendation">X</button>
         <h2>Watering Recommendation</h2>
-        <p id="recommendation_text">Based on the current weather and groundwater levels, we suggest watering your plants today.</p>
+        <p th:text="${recommendation}"> </p>
     </div>
 </div>
 
@@ -214,6 +216,8 @@
             <select name="municipality" id="municipality">
                 <option value="göteborg">Göteborg</option>
                 <option value="stockholm">Stockholm</option>
+                <option value="malmö">Malmö</option>
+                <option value="umeå">Umeå</option>
             </select><br><br>
 
             <div class="btn-holder">
@@ -231,8 +235,73 @@
 
     </div>
 </div>
+<div class="popup-container" id="account_settings_popup">
+    <div class="login-box">
+        <h2>Account Settings</h2>
 
+        <form action="/account/municipality"
+              method="post"
+              class="login-form">
+
+            <h3>Change municipality</h3>
+            <p>Current municipality: <strong th:text="${session.municipality}"></strong></p>
+            <label for="account_municipality">Municipality:</label><br>
+            <select name="municipality"
+                    id="account_municipality"
+                    required>
+                <option value="göteborg" th:selected="${session.municipality=='göteborg'}">Göteborg</option>
+                <option value="stockholm" th:selected="${session.municipality=='stockholm'}">Stockholm</option>
+                <option value="malmö" th:selected="${session.municipality=='malmö'}">Malmö</option>
+                <option value="umeå" th:selected="${session.municipality=='umeå'}">Umeå</option>
+            </select>
+
+
+            <br><br>
+            <button type="submit">Save municipality</button>
+        </form>
+
+        <hr>
+
+        <form action="/account/password"
+              method="post"
+              class="login-form">
+
+            <h3>Change password</h3>
+
+            <label for="current_password">Current password:</label><br>
+            <input type="password"
+                   id="current_password"
+                   name="currentPassword"
+                   required>
+
+            <br>
+
+            <label for="new_password">New password:</label><br>
+            <input type="password"
+                   id="new_password"
+                   name="newPassword"
+                   required>
+
+            <br>
+
+            <label for="confirm_new_password">Confirm new password:</label><br>
+            <input type="password"
+                   id="confirm_new_password"
+                   name="confirmPassword"
+                   required>
+
+            <br><br>
+            <button type="submit">Change password</button>
+        </form>
+
+        <br>
+        <button type="button" id="close_account_settings">
+            Close
+        </button>
+    </div>
+</div>
 <script src="/Scripts.js"></script>
+<script src="/AccountSettings.js"></script>
 
 </body>
 </html>

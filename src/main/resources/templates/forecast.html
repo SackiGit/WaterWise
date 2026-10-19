@@ -122,7 +122,7 @@
     <div class="recomendation-box">
         <button class="close-recomendation" type="button" id="close_recommendation">X</button>
         <h2>Watering Recommendation</h2>
-        <p id="recommendation_text">Based on the current weather and groundwater levels, we suggest watering your plants today.</p>
+        <p th:text="${recommendation}"> </p>
     </div>
 </div>
 
@@ -159,6 +159,8 @@
             <select name="municipality" id="municipality">
                 <option value="göteborg">Göteborg</option>
                 <option value="stockholm">Stockholm</option>
+                <option value="malmö">Malmö</option>
+                <option value="umeå">Umeå</option>
             </select> <br><br>
 
             <div class="btn-holder">
@@ -185,6 +187,8 @@
                     required>
                 <option value="göteborg" th:selected="${session.municipality=='göteborg'}">Göteborg</option>
                 <option value="stockholm" th:selected="${session.municipality=='stockholm'}">Stockholm</option>
+                <option value="malmö" th:selected="${session.municipality=='malmö'}">Malmö</option>
+                <option value="umeå" th:selected="${session.municipality=='umeå'}">Umeå</option>
             </select>
 
 

@@ -114,4 +114,21 @@ public class WaterRepository {
                 """;
         jdbcTemplate.update(sql,password, userId);
     }
+    public Map<String, Object> getRecommendation() {
+        String sql = """
+                SELECT Recommendation
+                FROM Recommendations
+                ORDER BY RANDOM()
+                LIMIT 1
+                """;
+        return jdbcTemplate.queryForMap(sql);
+    }
+    public Map<String, Object> getCoords(String municipality){
+        String sql = """
+                SELECT Lat,Long
+                FROM MunicipalityCoords
+                WHERE Municipality=?
+                """;
+        return jdbcTemplate.queryForMap(sql, municipality);
+    }
 }
