@@ -132,22 +132,86 @@ header{
 }
 
 
-
-
-
-
-
-
-
 .statistics{
     height: 100vh;
 }
 
+/* Lessons section */
+.lessons-section {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
 
+.lessons-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
+.lessons-label {
+    color: #176b87;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
 
+.lessons-heading h2 {
+    color: #176b87;
+    font-size: 28px;
+    margin: 12px 0 15px;
+}
 
+.lessons-heading p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333333;
+}
 
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.lesson-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-wrap: anywhere;
+}
+
+.lesson-number {
+    display: block;
+    color: #176b87;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.lesson-card h3 {
+    color: #176b87;
+    font-size: 24px;
+    margin: 0 0 20px;
+}
+
+.lesson-card p {
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0 0 15px;
+}
+
+.lesson-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .lessons-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
 
 
@@ -311,8 +375,6 @@ footer {
 }
 
 
-
-
 .question-group {
     margin-bottom: 20px;
     width:90%;
@@ -344,12 +406,6 @@ footer {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
-
-
-
-
-
-
 
 .caluclator-result {
     background-color: #0b3c5d;
@@ -388,21 +444,6 @@ footer {
     font-size: 14px;
     margin-top: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .logs-main{
     position: relative;
@@ -647,6 +688,8 @@ footer {
     height: 400px;
     margin: 30px auto;
 }
+
+/*------------------------------------------------------------------*/
 
 
 /* Logs page */
