@@ -244,7 +244,11 @@
               class="login-form">
 
             <h3>Change municipality</h3>
-            <p>Current municipality: <strong th:text="${session.municipality}"></strong></p>
+            <p>Current municipality: <strong  th:text="${session.municipality == 'goteborg' ? 'Göteborg' :
+             session.municipality == 'stockholm' ? 'Stockholm' :
+             session.municipality == 'malmo' ? 'Malmö' :
+             session.municipality == 'umea' ? 'Umeå' :
+             session.municipality}"></strong></p>
             <label for="account_municipality">Municipality:</label><br>
             <select name="municipality"
                     id="account_municipality"

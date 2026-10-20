@@ -131,4 +131,47 @@ public class WaterRepository {
                 """;
         return jdbcTemplate.queryForMap(sql, municipality);
     }
+
+    public List<Map<String, Object>> getMunConMonth(String municipality, LocalDate startDate, LocalDate endDate){
+        String sql = """
+                SELECT
+                months.month,
+                COALESCE(
+                FLOOR(
+                SUM(dc.TotalLitres)/NULLIF(COUNT(distinct dc.Userid),0)),0) AS avgCon
+                FROM generate_series(1,12) AS months(month)
+                LEFT JOIN(
+                SELECT
+                EXTRACT(MONTH FROM dc.Datum)::INT AS month,
+                dc.Userid,
+                dc.TotalLitres
+                FROM DailyConsumption dc
+                JOIN Users u ON dc.Userid = u.Userid
+                WHERE u.Municipality = ?
+                       AND dc.Datum >= ?
+                       AND dc.Datum <= ?
+                ) dc ON dc.month = months.month
+                GROUP BY months.month
+               ORDER BY months.month
+               """;
+        return jdbcTemplate.queryForList(sql,municipality, startDate, endDate);
+
+    }
+    public List<Map<String, Object>> getMunCon(String municipality, LocalDate startDate, LocalDate endDate){
+        String sql = """
+                SELECT
+                dc.Datum,
+                EXTRACT(MONTH FROM dc.Datum)::INT AS month,
+                FLOOR(SUM(dc.TotalLitres)/COUNT(distinct dc.Userid)) AS avgCon
+                FROM DailyConsumption dc
+                JOIN Users u ON dc.Userid = u.Userid
+                Where u.Municipality = ?
+                AND dc.Datum >= ?
+                AND dc.Datum <= ?
+                GROUP BY dc.Datum
+                ORDER BY dc.Datum
+                """;
+        return jdbcTemplate.queryForList(sql,municipality, startDate, endDate);
+
+    }
 }

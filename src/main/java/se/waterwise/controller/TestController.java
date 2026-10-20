@@ -91,6 +91,7 @@ public class TestController {
             }
 
 
+
         List<Map<String, Object>> activityConsumption =
                 waterRepository.getConsumptionByActivityByDate(userId, selectedStartDate, selectedEndDate);
         model.addAttribute("activityConsumption", activityConsumption);

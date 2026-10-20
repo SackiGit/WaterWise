@@ -6,7 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import se.waterwise.database.WaterRepository;
+
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Controller
 public class HomeController {
@@ -20,7 +26,13 @@ public class HomeController {
         model.addAttribute("username", username);
         Map<String, Object> recommendation = waterRepository.getRecommendation();
         model.addAttribute("recommendation", recommendation.get("recommendation"));
-
+        LocalDate today = LocalDate.now();
+        LocalDate firstDay = today.with(firstDayOfYear());
+        LocalDate lastDay = today.with(lastDayOfYear());
+        String municipality = (String) session.getAttribute("municipality");
+        List<Map<String, Object>> munCon = waterRepository.getMunConMonth(municipality, firstDay, lastDay);
+        model.addAttribute("munCon",munCon);
+        System.out.println(model.getAttribute("munCon"));
         return "index";
     }
 
