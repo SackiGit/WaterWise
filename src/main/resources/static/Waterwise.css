@@ -1018,3 +1018,39 @@ footer {
     border-left-color: #dc2626;
 }
 
+/*Logs not logged in message*/
+.login-required {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    width: 100%;
+}
+
+.login-required .login-required-button {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 450px;
+    margin: 0;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+}
+
+.login-required-title {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.login-required-button:hover {
+    background-color: #f0f9ff;
+}
+
+.login-required-button:focus-visible {
+    outline: 3px solid #0284c7;
+    outline-offset: 4px;
+}

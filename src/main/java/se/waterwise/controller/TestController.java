@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 @Controller
 public class TestController {
@@ -30,12 +30,12 @@ public class TestController {
     public String logs(Model model, HttpSession session,
                        @RequestParam(required = false) LocalDate startDate,
                        @RequestParam(required = false) LocalDate endDate,
-                       @RequestParam(defaultValue = "7")String period) {
+                       @RequestParam(defaultValue = "7")String period){
 
         Integer userId = (Integer) session.getAttribute("userId");
 
         if(userId == null){
-            return "redirect:/";
+            return "logs";
         }
         Object username = session.getAttribute("username");
         model.addAttribute("username",username);

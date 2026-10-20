@@ -33,7 +33,7 @@ public class GroundWaterController {
         double lat = ((Number) coords.get("Lat")).doubleValue();
         double lon = ((Number) coords.get("Long")).doubleValue();
         try {
-            // Central Gothenburg.
+
             return sguApi.getLatestGroundwaterData(lat,lon);
 
         } catch (InterruptedException exception) {
