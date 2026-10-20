@@ -14,6 +14,10 @@ import java.util.Map;
 @RestController
 public class RainForecastController {
 
+    private final WaterRepository waterRepository;
+    public RainForecastController(WaterRepository waterRepository) {
+        this.waterRepository = waterRepository;
+    }
     private final OpenMeteoApi openMeteoApi = new OpenMeteoApi();
     private final WaterRepository waterRepository;
     public RainForecastController(WaterRepository waterRepository){

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.waterwise.database.WaterRepository;
 import org.springframework.security.crypto.bcrypt.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Map;
 
 @Controller
@@ -21,9 +22,10 @@ public class LoginController {
             @RequestParam String password,
             @RequestParam String confirmPassword,
             @RequestParam String municipality,
-            HttpSession session) {
+            HttpSession session){
         Map<String, Object> user =
             waterRepository.findUser(username);
+
         if (user != null) {
             System.out.println("User already exists");
             return "redirect:/";
@@ -55,13 +57,17 @@ public class LoginController {
     public String login(
             @RequestParam String username,
             @RequestParam String password,
-            HttpSession session) {
+            HttpSession session,
+            RedirectAttributes redirectAttributes){
 
         Map<String, Object> user =
                 waterRepository.findUser(username);
 
+        //User not found
         if (user == null) {
             System.out.println("User does not exist");
+            redirectAttributes.addFlashAttribute("loginMessage", "This account does not exist");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
 
@@ -70,6 +76,8 @@ public class LoginController {
 
         if (!passwordEncoder.matches(password, storedPassword)) {
             System.out.println("Wrong password");
+            redirectAttributes.addFlashAttribute("loginMessage", "Wrong password");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
         Integer userId = (Integer) user.get("userid");
@@ -83,6 +91,8 @@ public class LoginController {
         System.out.println("User ID: " + userId);
         System.out.println("Municipality: " + municipality);
 
+        redirectAttributes.addFlashAttribute("loginMessage", "Logged in");
+        redirectAttributes.addFlashAttribute("loginType", "success");
         return "redirect:/";
     }
 @PostMapping("/logout")
@@ -94,7 +104,8 @@ public class LoginController {
 @PostMapping("/account/municipality")
     public String changeMunicipality(
             @RequestParam String municipality,
-            HttpSession session){
+            HttpSession session,
+            RedirectAttributes redirectAttributes){
         Integer userId = (Integer) session.getAttribute("userId");
 
 
@@ -104,6 +115,8 @@ public class LoginController {
         waterRepository.changeMunicipality(municipality, userId);
         session.setAttribute("municipality", municipality);
 
+    redirectAttributes.addFlashAttribute("loginMessage", "Municipality changed");
+    redirectAttributes.addFlashAttribute("loginType", "success");
         return "redirect:/";
     }
     @PostMapping("/account/password")
@@ -111,7 +124,8 @@ public class LoginController {
             @RequestParam String currentPassword,
             @RequestParam String newPassword,
             @RequestParam String confirmPassword,
-            HttpSession session) {
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
 
         Integer userId = (Integer) session.getAttribute("userId");
@@ -128,15 +142,21 @@ public class LoginController {
 
         if (!passwordEncoder.matches(currentPassword, storedPassword)) {
             System.out.println("Wrong password");
+            redirectAttributes.addFlashAttribute("loginMessage", "Current password is incorrect");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
         if(!newPassword.equals(confirmPassword)) {
             System.out.println("Passwords do not match");
+            redirectAttributes.addFlashAttribute("loginMessage", "New Passwords do not match");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
         String encryptedPassword = passwordEncoder.encode(newPassword);
         waterRepository.updateUser(encryptedPassword,userId);
 
+        redirectAttributes.addFlashAttribute("loginMessage", "Password changed successfully");
+        redirectAttributes.addFlashAttribute("loginType", "success");
         return "redirect:/";
     }
 }

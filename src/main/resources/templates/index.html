@@ -10,9 +10,12 @@
     </head>
 
     <body>
-
-
-
+        <p th:if="${loginMessage != null}"
+           th:text="${loginMessage}"
+           th:classappend="${loginType}"
+           class="login-message"
+           role="status">
+        </p>
 
             <div class="mainscreen">
                 <header>
@@ -43,7 +46,6 @@
                         </form>
                     </div>
                 </header>
-
                 <h1>Waterwise</h1>
             </div>
             
