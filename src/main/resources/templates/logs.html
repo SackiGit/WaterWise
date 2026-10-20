@@ -42,8 +42,17 @@
         <h1>Personal logs</h1>
     </div>
 
-
-<main class="logs-content-container">
+    <div class="logs-content-container login-required"
+         th:if="${session.userId == null}">
+        <button type="button"
+                class="log-card login-required-button"
+                onclick="document.getElementById('open_login').click()">
+            <span class="login-required-title">Log in to view your logs</span>
+            <span>Click here to sign in and track your water usage.</span>
+        </button>
+    </div>
+    <main class="logs-content-container"
+          th:if="${session.userId != null}">
 
     <!-- Total Consumption Banner Card -->
     <div class="log-card total-consumption-card">

@@ -104,7 +104,8 @@ public class LoginController {
 @PostMapping("/account/municipality")
     public String changeMunicipality(
             @RequestParam String municipality,
-            HttpSession session){
+            HttpSession session,
+            RedirectAttributes redirectAttributes){
         Integer userId = (Integer) session.getAttribute("userId");
 
 
@@ -114,6 +115,8 @@ public class LoginController {
         waterRepository.changeMunicipality(municipality, userId);
         session.setAttribute("municipality", municipality);
 
+    redirectAttributes.addFlashAttribute("loginMessage", "Municipality changed");
+    redirectAttributes.addFlashAttribute("loginType", "success");
         return "redirect:/";
     }
     @PostMapping("/account/password")
@@ -121,7 +124,8 @@ public class LoginController {
             @RequestParam String currentPassword,
             @RequestParam String newPassword,
             @RequestParam String confirmPassword,
-            HttpSession session) {
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
 
 
         Integer userId = (Integer) session.getAttribute("userId");
@@ -138,15 +142,21 @@ public class LoginController {
 
         if (!passwordEncoder.matches(currentPassword, storedPassword)) {
             System.out.println("Wrong password");
+            redirectAttributes.addFlashAttribute("loginMessage", "Current password is incorrect");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
         if(!newPassword.equals(confirmPassword)) {
             System.out.println("Passwords do not match");
+            redirectAttributes.addFlashAttribute("loginMessage", "New Passwords do not match");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
         String encryptedPassword = passwordEncoder.encode(newPassword);
         waterRepository.updateUser(encryptedPassword,userId);
 
+        redirectAttributes.addFlashAttribute("loginMessage", "Password changed successfully");
+        redirectAttributes.addFlashAttribute("loginType", "success");
         return "redirect:/";
     }
 }
