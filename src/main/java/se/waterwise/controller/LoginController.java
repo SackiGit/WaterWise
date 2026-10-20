@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.waterwise.database.WaterRepository;
 import org.springframework.security.crypto.bcrypt.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Map;
 
 @Controller
@@ -21,9 +22,10 @@ public class LoginController {
             @RequestParam String password,
             @RequestParam String confirmPassword,
             @RequestParam String municipality,
-            HttpSession session) {
+            HttpSession session){
         Map<String, Object> user =
             waterRepository.findUser(username);
+
         if (user != null) {
             System.out.println("User already exists");
             return "redirect:/";
@@ -55,13 +57,17 @@ public class LoginController {
     public String login(
             @RequestParam String username,
             @RequestParam String password,
-            HttpSession session) {
+            HttpSession session,
+            RedirectAttributes redirectAttributes){
 
         Map<String, Object> user =
                 waterRepository.findUser(username);
 
+        //User not found
         if (user == null) {
             System.out.println("User does not exist");
+            redirectAttributes.addFlashAttribute("loginMessage", "This account does not exist");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
 
@@ -70,6 +76,8 @@ public class LoginController {
 
         if (!passwordEncoder.matches(password, storedPassword)) {
             System.out.println("Wrong password");
+            redirectAttributes.addFlashAttribute("loginMessage", "Wrong password");
+            redirectAttributes.addFlashAttribute("loginType", "error");
             return "redirect:/";
         }
         Integer userId = (Integer) user.get("userid");
@@ -83,6 +91,8 @@ public class LoginController {
         System.out.println("User ID: " + userId);
         System.out.println("Municipality: " + municipality);
 
+        redirectAttributes.addFlashAttribute("loginMessage", "Logged in");
+        redirectAttributes.addFlashAttribute("loginType", "success");
         return "redirect:/";
     }
 @PostMapping("/logout")
