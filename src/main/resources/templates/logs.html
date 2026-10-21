@@ -136,6 +136,7 @@
 
             <!-- Filter Date Range Card -->
             <div class="log-card">
+                <h2>Filter Water Data By Date</h2>
                 <div class="period-presets">
                     <a th:href="@{/logs(period=1)}"
                        th:classappend="${period == '1'} ? ' active' : ''">
@@ -172,6 +173,8 @@
                 </form>
             </div>
             <div class="log-card">
+                <h2>Share of Water Consumption</h2>
+                <h5>For selected period</h5>
                 <div class="chart-container">
                     <canvas id="activityPieChart"></canvas>
                 </div>
@@ -184,6 +187,7 @@
     <div class="logs-grid tables-grid">
         <!-- Table 1 Card -->
         <div class="log-card">
+            <h2>Total Water Consumption (Per Day)</h2>
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -204,6 +208,7 @@
 
         <!-- Chart 1 Card -->
         <div class="log-card">
+            <h2>Daily Water Consumption</h2>
             <div class="chart-container">
                 <canvas id="totalChart"></canvas>
             </div>
@@ -211,6 +216,8 @@
 
         <!-- Table 2 Card -->
         <div class="log-card">
+            <h2>Consumption per Activity</h2>
+            <h5>For selected period</h5>
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -233,7 +240,9 @@
 
         <!-- Chart 2 Card -->
         <div class="log-card">
-            <div class="chart-container">
+            <h2>Water Consumption by Activity</h2>
+            <h5>For selected period</h5>
+            <div class="chart-container activity-chart-container">
                 <canvas id="activityChart"></canvas>
             </div>
         </div>
