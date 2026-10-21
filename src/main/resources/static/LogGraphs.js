@@ -67,8 +67,13 @@
                             ticks: {
                                 display: false,
                                 color: "#64748b",
-                                maxRotation: 0,
-                                autoSkip: false
+                                autoSkip: false,
+                                minRotation: 30,
+                                maxRotation: 30,
+                                padding: 10,
+                                font: {
+                                    size: 11
+                                }
                             }
                         },
 
