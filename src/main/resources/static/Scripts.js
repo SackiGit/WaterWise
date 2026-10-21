@@ -6,6 +6,13 @@ const login_form = document.getElementById('login_form')
 const register_form = document.getElementById('register_form')
 const back_to_login = document.getElementById('back_to_login')
 const close_register = document.getElementById('close_register')
+const toggle_nav = document.getElementById('mobile-nav-toggle');
+const nav_menu = toggle_nav?.closest('.dropdown-menu');
+
+toggle_nav?.addEventListener('click', () => {
+    const isOpen = nav_menu.classList.toggle('show');
+    toggle_nav.setAttribute('aria-expanded', String(isOpen));
+});
 
 open_login?.addEventListener('click', () => {
     popup_container.classList.add('show');
