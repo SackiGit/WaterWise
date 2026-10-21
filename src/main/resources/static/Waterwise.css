@@ -6,6 +6,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 main{
@@ -112,7 +113,7 @@ header{
 
 .info-card {
   width: 320px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.815);
   margin: 15%;
   padding: 30px;
   border-radius: 12px;
@@ -1053,4 +1054,368 @@ footer {
 .login-required-button:focus-visible {
     outline: 3px solid #0284c7;
     outline-offset: 4px;
+}
+
+/* Shared navigation layout */
+
+.dropdown-menu {
+    display: contents;
+}
+
+.hamburger-btn {
+    display: none;
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.nav-auth form {
+    margin: 0;
+}
+
+.nav-auth .login-button,
+.nav-auth .username {
+    margin-left: 0;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        box-sizing: border-box;
+    }
+
+    .dropdown-menu {
+        position: relative;
+        display: block;
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 24px;
+        padding: 2px 0;
+        box-sizing: border-box;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        z-index: 102;
+    }
+
+    .hamburger-btn span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #ffffff;
+        border-radius: 2px;
+    }
+
+    .hamburger-btn:focus-visible {
+        outline: 2px solid #ffffff;
+        outline-offset: 5px;
+    }
+
+    .nav-links {
+        display: flex;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 200px;
+        max-width: calc(100vw - 24px);
+        padding: 12px;
+        box-sizing: border-box;
+        background-color: rgba(11, 60, 93, 0.97);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        z-index: 101;
+    }
+
+    .dropdown-menu.show .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+
+    .nav-links .navitem {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 12px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .logo-link {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        line-height: 0;
+    }
+
+    .logoimage {
+        height: 56px;
+        border-radius: 28px;
+    }
+
+    .nav-auth {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end;
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 4px;
+    }
+
+    .login-button,
+    .username,
+    .logout-button {
+        min-height: 40px;
+        padding: 6px 8px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .nav-auth .username {
+        max-width: 95px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .nav-auth form {
+        display: flex;
+    }
+
+    .mainscreen {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 120px 20px 48px;
+        box-sizing: border-box;
+    }
+
+    .mainscreen h1 {
+        max-width: 100%;
+        font-size: clamp(48px, 15vw, 88px);
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+
+    .information {
+        min-height: auto;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 20px;
+    }
+
+    .info-card {
+        width: min(100%, 440px);
+        margin: 0;
+        padding: 24px;
+        box-sizing: border-box;
+    }
+
+    .watercalculator-mainscreen,
+    .logs-main,
+    .forecast-navbar,
+    .about-navbar {
+        height: auto;
+        min-height: 230px;
+        padding: 112px 16px 28px;
+        box-sizing: border-box;
+    }
+
+    .watercalculator-mainscreen h1 {
+        margin: 0;
+        font-size: clamp(28px, 8vw, 40px);
+        text-align: center;
+    }
+
+    .watercalculator-mainscreen p {
+        max-width: 36rem;
+        margin: 12px 0 0;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .watercalculator-mainscreen p br {
+        display: none;
+    }
+
+    .calculator-grid {
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px 16px;
+    }
+
+    .calculator-input,
+    .caluclator-result {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #calculator-form,
+    .caluclator-result {
+        padding: 20px;
+    }
+
+    .question-group {
+        width: 100%;
+    }
+
+    .question-group select {
+        min-height: 44px;
+        padding: 10px 12px;
+        box-sizing: border-box;
+    }
+
+    .calculator-input button {
+        min-height: 44px;
+    }
+
+    .breakdown-item {
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .groundwater-card,
+    .chart-container {
+        width: 100%;
+    }
+
+    .groundwater-card {
+        padding: 20px;
+    }
+
+    .groundwater-value strong {
+        font-size: clamp(2.5rem, 12vw, 3.5rem);
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .logs-content-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+
+    .logs-content-container > .total-consumption-card,
+    .logs-content-container > .log-card:has(form[action="/logs"]) {
+        grid-column: auto;
+    }
+
+    .logs-grid,
+    .log-stack,
+    .tables-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        min-width: 0;
+    }
+
+    .log-card {
+        min-width: 0;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    .log-card h2 {
+        font-size: 24px;
+    }
+
+    .table-wrapper {
+        max-width: 100%;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .log-card th,
+    .log-card td {
+        padding: 9px 10px;
+    }
+
+    .chart-container {
+        max-width: 100%;
+        margin: 12px auto;
+    }
+
+    .period-presets {
+        gap: 8px;
+    }
+
+    .period-presets a {
+        min-height: 44px;
+        padding: 10px 12px;
+        box-sizing: border-box;
+    }
+
+    .forecast-main {
+        padding: 20px 16px;
+    }
+
+    .rain-panel {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .rain-panel h2 {
+        font-size: 24px;
+    }
+
+    .rain-panel .rain-chart-container {
+        height: 280px;
+    }
+
+    .about-main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+
+    .about-card {
+        padding: 22px;
+        box-sizing: border-box;
+    }
+
+    .about-card h2 {
+        font-size: 22px;
+    }
+
+    .popup-container {
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    #popup_container .login-box,
+    #account_settings_popup .login-box {
+        width: 100%;
+        max-width: 420px;
+        padding: 22px;
+    }
+
+    .login-message {
+        top: 80px;
+        right: 12px;
+        max-width: calc(100vw - 24px);
+    }
 }

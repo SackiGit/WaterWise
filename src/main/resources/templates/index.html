@@ -20,30 +20,39 @@
             <div class="mainscreen">
                 <header>
                     <div class="nav-container">
-                        <a href="/">
+                        <a href="/" class="logo-link">
                             <img src="/Waterwise-logo.jpg" alt="Waterwise logo" class="logoimage">
                         </a>
 
-                        <nav>
-                            <a href="/watercalculator" class="navitem">Water calculator</a>
-                            <a href="/logs" class="navitem">Logs</a>
-                            <a href="/about-us" class="navitem">About us</a>
-                            <a href="/forecast" class="navitem">Forecast</a>
-                        </nav>
+                        <div class="dropdown-menu">
+                            <button class="hamburger-btn" type="button" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                            <nav class="nav-links" aria-label="Main navigation">
+                                <a href="/watercalculator" class="navitem">Water calculator</a>
+                                <a href="/logs" class="navitem">Logs</a>
+                                <a href="/about-us" class="navitem">About us</a>
+                                <a href="/forecast" class="navitem">Forecast</a>
+                            </nav>
+                        </div>
+                        <div class="nav-auth">
                             <button class="login-button"
-                              id="open_login"
-                              th:if="${username == null}">
-                          Login
-                      </button>
-                        <button type="button"
-                                class="username"
-                                id="open_account_settings"
-                                th:if="${username != null}"
-                                th:text="${username}">
-                        </button>
-                        <form action="/logout" method="post" th:if="${username !=null}">
-                            <button type="submit" class="logout-button">Logout</button>
-                        </form>
+                                    id="open_login"
+                                    th:if="${username == null}">
+                                Login
+                            </button>
+                            <button type="button"
+                                    class="username"
+                                    id="open_account_settings"
+                                    th:if="${username != null}"
+                                    th:text="${username}">
+                            </button>
+                            <form action="/logout" method="post" th:if="${username !=null}">
+                                <button type="submit" class="logout-button">Logout</button>
+                            </form>
+                        </div>
                     </div>
                 </header>
                 <h1>Waterwise</h1>
