@@ -708,6 +708,14 @@ footer {
     color: #0b3c5d;
     font-size: 30px;
     margin-bottom: 16px;
+    text-align: center;
+}
+
+.log-card h5 {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 16px;
 }
 
 .log-card select,
@@ -793,6 +801,12 @@ footer {
     grid-column: span 2;
 }
 
+/*Bar chart in logs fill out space*/
+.chart-container.activity-chart-container {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 0;
+}
 
 
 #account_settings_popup {
@@ -1342,6 +1356,7 @@ footer {
     .log-card h2 {
         font-size: 24px;
     }
+
 
     .table-wrapper {
         max-width: 100%;
