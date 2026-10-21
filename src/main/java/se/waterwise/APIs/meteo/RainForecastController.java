@@ -19,11 +19,7 @@ public class RainForecastController {
         this.waterRepository = waterRepository;
     }
     private final OpenMeteoApi openMeteoApi = new OpenMeteoApi();
-    private final WaterRepository waterRepository;
-    public RainForecastController(WaterRepository waterRepository){
-        this.waterRepository=waterRepository;
-    }
-
+   
     @GetMapping("/api/rain-forecast")
     public List<RainData> getRainForecast(HttpSession session) {
 
