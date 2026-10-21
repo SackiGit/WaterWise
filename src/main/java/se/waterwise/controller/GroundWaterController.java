@@ -26,12 +26,26 @@ public class GroundWaterController {
 
     @GetMapping("/api/groundwater/current")
     public GroundWaterData getCurrentGroundwater(HttpSession session) {
-        String municipality = (String) session.getAttribute("municipality");
 
-        Map<String, Object> coords = waterRepository.getCoords(municipality);
+        // Default coordinates: Gothenburg
+        double lat = 57.7089;
+        double lon = 11.9746;
 
-        double lat = ((Number) coords.get("Lat")).doubleValue();
-        double lon = ((Number) coords.get("Long")).doubleValue();
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId != null) {
+            String municipality =
+                    (String) session.getAttribute("municipality");
+
+            if (municipality != null && !municipality.isBlank()) {
+                Map<String, Object> coords =
+                        waterRepository.getCoords(municipality);
+
+                lat = ((Number) coords.get("Lat")).doubleValue();
+                lon = ((Number) coords.get("Long")).doubleValue();
+            }
+        }
+
         try {
 
             return sguApi.getLatestGroundwaterData(lat,lon);
