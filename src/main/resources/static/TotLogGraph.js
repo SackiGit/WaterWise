@@ -7,22 +7,44 @@
     }
 
     const totalData = window.totalData || [];
+    const avgData = window.avgData || [];
     const labels = totalData.map(row => row.datum);
     const values = totalData.map(row => row.totallitres);
+    const avgByDate = new Map(
+            avgData.map(row => [
+                String(row.datum),
+                Number(row.avgcon)
+            ])
+        );
+     const avgValues = labels.map(date =>
+            avgByDate.get(String(date)) ?? null
+        );
       new Chart(chartElement, {
                 type: "line",
                 data: {
                     labels: labels,
 
                     datasets: [{
-                        label: "Total consumption over time",
+                        label: "Personal",
                         data: values ,
+                        borderColor: "#38bdf8",
                         backgroundColor: "#38bdf8",
                         hoverBackgroundColor: "#0284c7",
                         borderRadius: 6,
                         borderSkipped: "bottom",
                         maxBarThickness: 56
-                    }]
+                    },
+                    {
+                        label: "Average",
+                        data: avgValues ,
+                        borderColor: "#FF0000",
+                        backgroundColor: "#FF0000",
+                        hoverBackgroundColor: "#0284c7",
+                        borderDash: [5,5],
+                        borderRadius: 6,
+                        borderSkipped: "bottom",
+                        maxBarThickness: 56
+                                        }]
                 },
 
                 options: {
@@ -47,7 +69,7 @@
                             padding: 12,
                             callbacks: {
                                 label: function(context){
-                                return `${context.parsed.y} L`;
+                                return `${context.dataset.label}: ${context.parsed.y} L`;
                                 }
                             }
 
@@ -65,6 +87,7 @@
                                 display: false
                             },
                             ticks: {
+                                display: false,
                                 color: "#64748b",
                                 maxRotation: 0,
                                 autoSkip: false

@@ -30,6 +30,10 @@ public class HomeController {
         LocalDate firstDay = today.with(firstDayOfYear());
         LocalDate lastDay = today.with(lastDayOfYear());
         String municipality = (String) session.getAttribute("municipality");
+        if (municipality == null){
+            municipality="goteborg";
+            session.setAttribute("municipality",municipality);
+        }
         List<Map<String, Object>> munCon = waterRepository.getMunConMonth(municipality, firstDay, lastDay);
         model.addAttribute("munCon",munCon);
         System.out.println(model.getAttribute("munCon"));

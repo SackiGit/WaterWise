@@ -24,6 +24,10 @@ public class RainForecastController {
     public List<RainData> getRainForecast(HttpSession session) {
 
         String municipality = (String) session.getAttribute("municipality");
+        if (municipality == null){
+            municipality="goteborg";
+            session.setAttribute("municipality",municipality);
+        }
         Map<String, Object> coords = waterRepository.getCoords(municipality);
 
         double lat = ((Number) coords.get("Lat")).doubleValue();

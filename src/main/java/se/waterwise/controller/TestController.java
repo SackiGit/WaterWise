@@ -1,5 +1,7 @@
 package se.waterwise.controller;
 
+import org.slf4j.spi.LocationAwareLogger;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +49,18 @@ public class TestController {
 
         List<Map<String, Object>> data =
                 waterRepository.getDailyConsumption(userId);
+        String municipality = (String) session.getAttribute("municipality");
+
+        List<Map<String, Object>> avgData = List.of();
+        if (!data.isEmpty()) {
+            Map<String, Object> firstData = data.getFirst();
+            Map<String, Object> lastData = data.getLast();
+            java.sql.Date tempFirstDate = (java.sql.Date) firstData.get("Datum");
+            java.sql.Date tempLastDate = (java.sql.Date) lastData.get("Datum");
+            LocalDate firstDate = tempFirstDate.toLocalDate();
+            LocalDate lastDate = tempLastDate.toLocalDate();
+            avgData = waterRepository.getMunCon(municipality, firstDate, lastDate);
+        }
 
         Map<String, Object> total =
                 waterRepository.getTotalConsumption(userId);
@@ -67,6 +83,7 @@ public class TestController {
 
         model.addAttribute("total", total);
         model.addAttribute("consumption", data);
+        model.addAttribute("avgConsumption", avgData);
         model.addAttribute("daysPosted", daysPosted);
         model.addAttribute("averageDailyConsumption", averageDailyConsumption);
 

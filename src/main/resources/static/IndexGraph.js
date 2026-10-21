@@ -72,6 +72,7 @@ function loadMunChart(){
                                 display: false
                             },
                             ticks: {
+                                display: false,
                                 color: "#64748b",
                                 maxRotation: 0,
                                 autoSkip: false

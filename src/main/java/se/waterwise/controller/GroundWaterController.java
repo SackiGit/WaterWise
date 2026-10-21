@@ -26,8 +26,12 @@ public class GroundWaterController {
 
     @GetMapping("/api/groundwater/current")
     public GroundWaterData getCurrentGroundwater(HttpSession session) {
-        String municipality = (String) session.getAttribute("municipality");
 
+        String municipality = (String) session.getAttribute("municipality");
+        if (municipality == null){
+            municipality="goteborg";
+            session.setAttribute("municipality",municipality);
+        }
         Map<String, Object> coords = waterRepository.getCoords(municipality);
 
         double lat = ((Number) coords.get("Lat")).doubleValue();

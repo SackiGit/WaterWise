@@ -161,8 +161,9 @@ public class WaterRepository {
         String sql = """
                 SELECT
                 dc.Datum,
-                EXTRACT(MONTH FROM dc.Datum)::INT AS month,
-                FLOOR(SUM(dc.TotalLitres)/COUNT(distinct dc.Userid)) AS avgCon
+                COALESCE(
+                FLOOR(
+                SUM(dc.TotalLitres)/NULLIF(COUNT(distinct dc.Userid),0)),0) AS avgCon
                 FROM DailyConsumption dc
                 JOIN Users u ON dc.Userid = u.Userid
                 Where u.Municipality = ?
